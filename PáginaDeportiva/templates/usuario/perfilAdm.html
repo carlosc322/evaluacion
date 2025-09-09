@@ -29,7 +29,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="Bienvenido "><a class="navbar-brand text-uppercase">Bienvenido</a></li>
 
-                        <li><button type="button" class="btn btn-success navbar-btn btn-circle">Salir</button></li>
+                        <a href="{% url 'perfil' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">ver contenido</a>
+                        <a href="{% url 'login' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">cerrar sesión</a>
                     </ul>
                 </div>
             </div>
