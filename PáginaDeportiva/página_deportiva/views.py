@@ -3,8 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 
 #ESTADIO
-def ingresarDatos(request):
-    return render(request, 'estadio/ingresarDatos.html')
+def ingresarEs(request):
+    return render(request, 'estadio/ingresarEs.html')
 
-def mostrarDatos(request):
-    return render(request, 'estadio/mostrarDatos.html')
+def mostrarEs(request):
+    datos = {"nombreEstadio":"Estado Villa del Norte","cantidad":"1000"}
+
+    return render(request, 'estadio/vistaEs.html',datos)

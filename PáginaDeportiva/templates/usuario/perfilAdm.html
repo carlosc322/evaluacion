@@ -11,39 +11,53 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-    <link rel="stylesheet" href="{% static 'css/usuario/perfil.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/usuario/perfiladn.css' %}">
+    <link rel="stylesheet" href="{% static 'estadio/ingresarEs.css' %}">
+    
+    {% block extra_css %}
+    {% endblock %}
 </head>
 <body>
-    <div class="wrapper">
+    
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                    </button>
                     <a class="navbar-brand text-uppercase" href="#">Página Deportiva</a>
                 </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="Bienvenido "><a class="navbar-brand text-uppercase">Bienvenido</a></li>
+                        <li class="Bienvenido "><a class="navbar-brand text-uppercase">Bienvenido {{nombre}}</a></li>
 
-                        <a href="{% url 'perfil' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">ver contenido</a>
-                        <a href="{% url 'login' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">cerrar sesión</a>
+                        <a href="{% url 'perfil' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">Ver contenido</a>
+                        <a href="{% url 'login' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">Cerrar sesión</a>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="col-md-3 column margintop20 responsive-sidebar">
+
+
+    <div class="responsive-wrapper">
+        <!-- SIDEBAR -->
+        <div class="responsive-sidebar">
             <ul class="nav nav-pills nav-stacked">
                 <li class="gestion"><p>Gestión</p></li>
                 <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Jugadores</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Equipos</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Partidos</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Estadio</a></li>
+                <li><a href="{% url 'ingresarEs' %}"><span class="glyphicon glyphicon-chevron-right"></span> Estadios</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Arbitros</a></li>
             </ul>
         </div>
+
+        <!-- CONTENIDO DINÁMICO -->
+        <div class="contenido-principal">
+            {% block contenido %}
+            {% endblock %}
+        </div>
     </div>
+    <footer>
+            <p>Página Deportiva 2025</p>
+    </footer>
 </body>
