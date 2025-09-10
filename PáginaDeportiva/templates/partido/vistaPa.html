@@ -1,4 +1,4 @@
-{% extends 'usuario/vistaPa.html' %}
+{% extends 'usuario/perfil.html' %}
 
 {% load static %}
 
@@ -22,23 +22,27 @@ ver partido
 {% block content %}
 <div id="partidos" class="contenido-partidos" style="margin-left: 220px; padding-top: 80px;">
     <div class="partido panel panel-default">
-    <div class="fila-partido">
-        <!-- Caja 1: Equipos -->
-        <div class="caja equipos">
-            <p class="equipoA">Equipo A</p>
-            <p>vs</p>
-            <p class="equipoB">Equipo B</p>
-        </div>
+        <div class="fila-partido">
+            <!-- Caja 1: Equipos -->
+            <div class="caja equipos">
+                <p class="equipoA">Equipo A</p>
+                <p>vs</p>
+                <p class="equipoB">Equipo B</p>
+            </div>
 
-        <!-- Caja 2: Detalles -->
-        <div id="colores" class="caja detalles">
-            <p>Árbitro: Juan Pérez</p>
-            <p>Fecha: 12/09/2025</p>
-            <p>Horario: 18:00</p>
-            <p>Estadio: Nacional</p>
+            <!-- Caja 2: Detalles -->
+            <div id="colores" class="caja detalles">
+                <a href="{% url 'vistaAr' %}"><p>Árbitro: Juan Lopez</p></a>
+                <p>Fecha: 12/09/2025</p>
+                <p>Horario: 18:00</p>
+                <p>Estadio: Nacional</p>
+            </div>
+
+                    
+            
         </div>
     </div>
-    </div>
+    
 </div>
 
 {% endblock %}
