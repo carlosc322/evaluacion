@@ -1,0 +1,71 @@
+#contenido{
+    margin: auto;
+    padding: 10px 15px;
+    
+    background-color: rgb(237, 237, 227);
+    width: 60%;
+    text-align: center;
+
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #59af5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#btn1:hover {
+    background-color: #609763;
+}
+
+#btn2:hover {
+    background-color: rgb(211, 109, 109) ;
+}
+#btn3:hover {
+    background-color: rgb(125, 125, 206);
+}
+
+/*BOTONES*/
+#btn2{
+    background-color: rgb(168, 84, 84) ;
+}
+
+#btn3{
+    background-color: rgb(111, 111, 217);
+}
+
+
+img {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius: 8px;
+}

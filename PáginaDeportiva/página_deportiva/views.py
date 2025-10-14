@@ -31,11 +31,17 @@ def ingresarJugador(request):
 
     return render(request, 'jugador/ingresarJu.html')
 
+def verJugador(request):
+    return render(request,'jugador/vistaJu.html')
 #EQUIPO
 
 def ingresarEquipo(request):
 
     return render(request, 'equipo/ingresarEq.html')
+
+def verEquipos(request):
+
+    return render(request, 'equipo/vistaEq.html')
 
 #ARBITRO
 
@@ -46,4 +52,4 @@ def ingresarArbitro(request):
 def verArbitro(request):
     arbitro1 = {"id":"01","nombre":"Juan", "apellido":"Lopez","edad":"41","nacionalidad":"chilena"}
 
-    return render(request,'arbitro/vistaAr.html',arbitro1)
+    return render(request,'arbitro/vistaAr.html')

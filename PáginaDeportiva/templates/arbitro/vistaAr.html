@@ -1,28 +1,159 @@
-{% extends 'usuario/vistaPa.html' %}
-
+<!DOCTYPE html>
 {% load static %}
 
-{% block title %}
-Arbitro
-{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/arbitro/viIndice.css' %}">
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'usuario/perfil.css' %}">
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="https://fonts.googleapis.com/css?family=Oswald:700|Patua+One|Roboto+Condensed:700" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/arbitro/fontello.css' %}">
 
 
-{% block content %}
-<div class="arbitro">
-    <p>Nombre del arbitro: {{arbitro1.nombre}}</p>
+</head>
+<body>
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
 
-</div>
+            <!-- ✅ Checkbox para controlar el menú (oculto) -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-{% endblock %}
+            <!-- ✅ Etiqueta que actúa como botón de menú -->
+            <label for="menu-toggle" class="profile-trigger">
+                <div class="userName">User Name</div>
+                <img src="{% static 'css/arbitro/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+            </label>
+
+                <!-- ✅ Menú desplegable -->
+            <div class="dropdown">
+                <a href="#">Ver perfil</a>
+                <a href="#">Cerrar sesión</a>
+            </div>
+    </div>
+</header>
+    <div id="espacio">
+
+    </div>
+
+        
+    <div id="presentacion">
+        
+        <div id="nav_contenido">
+
+            <nav id="nav">
+                <section class="seccion ss1">Inicio  </section>
+                <section class="seccion" id="titulo">Panel de Administración</section>
+                
+                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="">Torneos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section></section>
+            </nav>
+
+            <div id="container_contenido">
+                <div class="barra-superior">
+                    <input type="text" placeholder="Filtrar arbitro..." class="buscador">
+                    <button class="btn-anadir"><a href="{% url 'ingresarAr' %}">Añadir Arbitro</a></button>
+                </div>
+
+
+                <div class="grid-tarjetas">
+                        <!-- Tarjeta ejemplo -->
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/arbitro/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">Nombre de Arbitro</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/arbitro/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">Nombre de arbitro</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">nombre de arbitro</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">Nombre de arbitro</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">Título de la noticia</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">Título de la noticia</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="tarjeta">
+                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
+                            <div class="tarjeta-footer">
+                                <span class="titulo">Título de la noticia</span>
+                                <div class="botones-opciones">
+                                    <button class="btn-opcion">Actualizar</button>
+                                    <button class="btn-opcion eliminar">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Repite la tarjeta cuantas veces necesites -->
+                </div>
+            </div>
+        </div>
+                    <footer id="footer">
+                <p class="pie">Pasion Deportiva 2025</p>
+            </footer>
+    </div> 
+</body>
+</html>

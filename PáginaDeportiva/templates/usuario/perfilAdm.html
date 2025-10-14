@@ -1,63 +1,83 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}perfil{% endblock %}</title>
+    <title>perfil</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/usuario/perfilAdmin.css' %}">
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="{% static 'css/usuario/fontello.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/usuario/perfiladn.css' %}">
-    <link rel="stylesheet" href="{% static 'estadio/ingresarEs.css' %}">
-    
-    {% block extra_css %}
-    {% endblock %}
+
 </head>
 <body>
-    
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a class="navbar-brand text-uppercase" href="#">Página Deportiva</a>
-                </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navigation">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="Bienvenido "><a class="navbar-brand text-uppercase">Bienvenido {{user.username}}</a></li>
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
 
-                        <a href="{% url 'perfil' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">Ver contenido</a>
-                        <a href="{% url 'login' %}" class="btn btn-primary btn btn-success navbar-btn btn-circle">Cerrar sesión</a>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            <!-- ✅ Checkbox para controlar el menú (oculto) -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
+            <!-- ✅ Etiqueta que actúa como botón de menú -->
+            <label for="menu-toggle" class="profile-trigger">
+                <div class="userName">User Name</div>
+                <img src="{% static 'css/usuario/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+            </label>
 
-    <div class="responsive-wrapper">
-        <!-- SIDEBAR -->
-        <div class="responsive-sidebar">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="gestion"><p>Gestión</p></li>
-                <li><a href="{% url 'ingresarJu' %}"><span class="glyphicon glyphicon-chevron-right"></span> Jugador</a></li>
-                <li><a href="{% url 'ingresarEq' %}"><span class="glyphicon glyphicon-chevron-right"></span> Equipo</a></li>
-                <li><a href="{% url 'ingresarPa' %}"><span class="glyphicon glyphicon-chevron-right"></span> Partido</a></li>
-                <li><a href="{% url 'ingresarEs' %}"><span class="glyphicon glyphicon-chevron-right"></span> Estadio</a></li>
-                <li><a href="{% url 'ingresarAr' %}"><span class="glyphicon glyphicon-chevron-right"></span> Arbitro</a></li>
-            </ul>
-        </div>
-
-        <!-- CONTENIDO DINÁMICO -->
-        <div class="contenido-principal">
-            {% block content %}
-            {% endblock %}
+            <!-- ✅ Menú desplegable -->
+        <div class="dropdown">
+            <a href="#">Ver perfil</a>
+            <a href="#">Cerrar sesión</a>
         </div>
     </div>
-    <footer>
-            <p>Página Deportiva 2025</p>
-    </footer>
+</header>
+    <div id="espacio">
+
+    </div>
+
+        
+    <div id="presentacion">
+        <div id="bienvenida"></div>
+        <div id="nav_contenido">
+
+            <nav id="nav">
+                <section class="seccion ss1">Inicio  </section>
+                <section class="seccion" id="titulo">Panel de Administración</section>
+                
+                <section class="seccion ss1" id="noticia"><a href="tituloD">Noticias <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="">Torneos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section></section>
+            </nav>
+
+            <div id="contenido">
+                <div id="tituloD">Noticias</div>
+                <form method="POST" enctype="multipart/form-data">
+                        <label for="titulo">Título:</label><br>
+                        <input type="text" name="titulo" required><br><br>
+
+                        <label for="imagen">Imagen:</label><br>
+                        <input type="file" name="imagen" accept="image/*"><br><br>
+
+                        <label for="contenido">Contenido:</label><br>
+                        <textarea name="contenido" rows="10" cols="50" required></textarea><br><br>
+
+                        <div id="botones">
+                            <button id="btn1" type="submit">Publicar</button>
+                            <button id="btn2" type="submit">Cancelar</button>
+                            <button id="btn3" type="submit">Borrador</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        <footer id="footer">
+            <p class="pie">Pasion Deportiva 2025</p>
+        </footer>
+    </div> 
 </body>
+</html>

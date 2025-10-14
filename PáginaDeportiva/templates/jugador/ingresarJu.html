@@ -1,59 +1,101 @@
-{% extends 'usuario/perfilAdm.html' %}
-
+<!DOCTYPE html>
 {% load static %}
 
-{% block title %}
-jugador
-{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jugador/agIndice.css' %}
+">
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'estadio/ingresarEs.css' %}">
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="https://fonts.googleapis.com/css?family=Oswald:700|Patua+One|Roboto+Condensed:700" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/jugador/fontello.css' %}">
 
 
-{% block content %}
-<section id="contact" class="content-section">
-    <div class="contact-section">
-        <div class="container">
-            <h2 class="text-center">JUGADOR</h2>
+</head>
+<body>
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
 
-            <form class="form-horizontal" method="post">
-                <div class="form-group">
-                    <label for="exampleInputName2">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="nombre del jugador">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Apellido</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="apellido del jugador">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Dorsal</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="dorsal del jugador">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Nacionalidad</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="nacionalidad del jugador">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Posición</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="Posición del jugador">
-                </div>
-            </form>
+            <!-- ✅ Checkbox para controlar el menú (oculto) -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-            <hr>
-            <ul class="list-inline banner-social-buttons text-center">
-                <li><a href="#" class="btn btn-default btn-lg"><span class="network-name">Publicar</span></a></li>
-                <li><a href="#" class="btn btn-default btn-lg"><span class="network-name">Cancelar</span></a></li>
-            </ul>
-        </div>
+            <!-- ✅ Etiqueta que actúa como botón de menú -->
+            <label for="menu-toggle" class="profile-trigger">
+                <div class="userName">User Name</div>
+                <img src="{% static 'css/jugador/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+            </label>
+
+                <!-- ✅ Menú desplegable -->
+            <div class="dropdown">
+                <a href="#">Ver perfil</a>
+                <a href="#">Cerrar sesión</a>
+            </div>
     </div>
-</section>
-{% endblock %}
+</header>
+    <div id="espacio">
+
+    </div>
+
+        
+    <div id="presentacion">
+        
+        <div id="nav_contenido">
+
+            <nav id="nav">
+                <section class="seccion ss1">Inicio  </section>
+                <section class="seccion" id="titulo">Panel de Administración</section>
+                
+                
+                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="">Torneos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section></section>
+            </nav>
+
+
+                <!-- Dentro del div con id="container_contenido" -->
+                <div id="container_contenido">
+
+                    <!-- Botón Volver -->
+                    <a href="{% url 'vistaJu' %}" class="btn-volver">⬅ Volver</a>
+        
+                    <!-- Formulario de Registro de Equipo -->
+                    <form class="formulario-equipo">
+                        
+                        <!-- Nombre del equipo -->
+                        <label for="nombreEquipo">Nombre del jugador:</label>
+                        <input type="text" id="nombreEq" name="nombreEquipo" placeholder="Nombre..." required>
+
+                        <!-- Uniforme (color) -->
+                        <label for="apellidoEq">Apellido del jugador:</label>
+                        <input type="text" id="apellidoEq" name="apellidoEq" placeholder="Apellido...">
+
+                        <label for="dorsal">Dorsal del jugador:</label>
+                        <input type="text" id="dorsal" name="dorsal" placeholder="Dorsal...">
+
+                        <label for="nacionalidad">Nacionalidad del jugador:</label>
+                        <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad...">
+
+                        <label for="posicion">Posición de juego:</label>
+                        <input type="text" id="posicion" name="posicion" placeholder="Posición...">
+
+                        <!-- Botones -->
+                        <div class="botones-formulario">
+                            <a href="#" class="btn guardar">Guardar</a>
+                            <a href="#" class="btn cancelar">Cancelar</a>
+                            <a href="#" class="btn borrador">Borrador</a>
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+                    <footer id="footer">
+                <p class="pie">Pasion Deportiva 2025</p>
+            </footer>
+    </div> 
+</body>
+</html>

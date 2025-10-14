@@ -1,57 +1,97 @@
-{% extends 'usuario/perfilAdm.html' %}
-
+<!DOCTYPE html>
 {% load static %}
 
-{% block title %}
-jugador
-{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/arbitro/agIndice.css' %}
+">
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'estadio/ingresarEs.css' %}">
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="https://fonts.googleapis.com/css?family=Oswald:700|Patua+One|Roboto+Condensed:700" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/arbitro/fontello.css' %}">
 
 
-{% block content %}
-<section id="contact" class="content-section">
-    <div class="contact-section">
-        <div class="container">
-            <h2 class="text-center">ÁRBITRO</h2>
+</head>
+<body>
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
 
-            <form class="form-horizontal" method="post">
-                <div class="form-group">
-                    <label for="exampleInputName2">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="nombre del árbitro">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Apellido</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="apellido del árbitro">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Edad</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="edad del árbitro">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2">Nacionalidad</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="nacionalidad del árbitro">
-                </div>
-                
+            <!-- ✅ Checkbox para controlar el menú (oculto) -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-            </form>
+            <!-- ✅ Etiqueta que actúa como botón de menú -->
+            <label for="menu-toggle" class="profile-trigger">
+                <div class="userName">User Name</div>
+                <img src="{% static 'css/arbitro/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+            </label>
 
-            <hr>
-            <ul class="list-inline banner-social-buttons text-center">
-                <li><a href="#" class="btn btn-default btn-lg"><span class="network-name">Publicar</span></a></li>
-                <li><a href="#" class="btn btn-default btn-lg"><span class="network-name">Cancelar</span></a></li>
-            </ul>
-        </div>
+                <!-- ✅ Menú desplegable -->
+            <div class="dropdown">
+                <a href="#">Ver perfil</a>
+                <a href="#">Cerrar sesión</a>
+            </div>
     </div>
-</section>
-{% endblock %}
+</header>
+    <div id="espacio">
+
+    </div>
+
+        
+    <div id="presentacion">
+        
+        <div id="nav_contenido">
+
+            <nav id="nav">
+                <section class="seccion ss1">Inicio  </section>
+                <section class="seccion" id="titulo">Panel de Administración</section>
+                
+                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="">Torneos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section></section>
+            </nav>
+
+
+                <!-- Dentro del div con id="container_contenido" -->
+                <div id="container_contenido">
+
+                    <!-- Botón Volver -->
+                    <a href="{% url 'vistaAr' %}" class="btn-volver">⬅ Volver</a>
+        
+                    <!-- Formulario de Registro de Equipo -->
+                    <form class="formulario-equipo">
+                        
+                        <!-- Nombre del equipo -->
+                        <label for="nombreAr">Nombre del árbitro:</label>
+                        <input type="text" id="nombreAr" name="nombreAr" placeholder="Nombre...">
+
+                        <!-- Uniforme (color) -->
+                        <label for="apellidoAr">Apellido del árbitro:</label>
+                        <input type="text" id="apellidoAr" name="apellidoAr" placeholder="Apellido...">
+
+                        <label for="adadAr">Edad del árbitro:</label>
+                        <input type="text" id="adadAr" name="edadAr" placeholder="Edad...">
+
+                        <label for="nacionalidadAr">Nacionalidad del árbitro:</label>
+                        <input type="text" id="nacionalidadAr" name="nacionalidadAr" placeholder="Nacionalidad...">
+
+                        <!-- Botones -->
+                        <div class="botones-formulario">
+                            <a href="#" class="btn guardar">Guardar</a>
+                            <a href="#" class="btn cancelar">Cancelar</a>
+                            <a href="#" class="btn borrador">Borrador</a>
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+                    <footer id="footer">
+                <p class="pie">Pasion Deportiva 2025</p>
+            </footer>
+    </div> 
+</body>
+</html>
