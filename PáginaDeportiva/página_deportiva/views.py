@@ -27,13 +27,14 @@ def ingresarEstadio(request):
 
 
 def verEstadio(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombreEs')
-        cantidad = request.POST.get('cantidadEs')
+    estadios = Estadio.objects.all()
+    data = {'estadios':estadios}
+    return render(request, 'estadio/vistaEs.html',data)
 
-        estadio1 = {"id":"01","nombreEstadio":"Estado Villa del Norte","cantidad":"1000"}
-        estadio2 = {"id":"02","nombreEstadio":"Estado Villa Adela","cantidad":"2000"}
-    return render(request, 'estadio/vistaEs.html')
+def eliminarEstadio(request,id):
+    estadio = Estadio.objects.get(id=id)
+    estadio.delete()
+    return redirect('vistaEs')#'vistaEs' viene de url.py --> name='vistaEs'
 
 #PARTIDO-----------------------------------------------
 
@@ -55,8 +56,14 @@ def ingresarPartido(request):
     return render(request,'partido/ingresarPa.html',{'form':form})
 
 def verPartido(request):
+    partidos = Partido.objects.all()
+    data = {'partidos':partidos}
+    return render(request, 'partido/vistaPa.html',data)
 
-    return render(request, 'partido/vistaPa.html')
+def eliminarPartido(request,id):
+    partido = Partido.objects.get(id = id)
+    partido.delete()
+    return redirect('vistaPa') #'vistaPa' viene de url.py --> name='vistaPa'
 
 #JUGADOR
 from página_deportiva.forms import FormJugador
@@ -83,7 +90,15 @@ def ingresarJugador(request):
     return render(request, 'jugador/ingresarJu.html',{'form':form})
 
 def verJugador(request):
-    return render(request,'jugador/vistaJu.html')
+    jugadores = Jugador.objects.all()
+    data = {'jugadores':jugadores}
+    return render(request,'jugador/vistaJu.html',data)
+
+def eliminarJugador(request,id):
+    jugador = Jugador.objects.get(id = id)
+    jugador.delete()
+    return redirect('vistaJu')
+
 
 #EQUIPO------------------------------------------------
 
@@ -113,8 +128,14 @@ def ingresarEquipo(request):
 
 
 def verEquipo(request):
+    equipos = Equipo.objects.all()
+    data = {'equipos':equipos}
+    return render(request, 'equipo/vistaEq.html',data)
 
-    return render(request, 'equipo/vistaEq.html')
+def eliminarEquipo(request,id):
+    equipo = Equipo.objects.get(id = id)
+    equipo.delete()
+    return redirect('vistaEq')
 
 #ARBITRO----------------------------------------------------
 
@@ -145,7 +166,12 @@ def ingresarArbitro(request):
 
 
 def verArbitro(request):
-    arbitro1 = {"id":"01","nombre":"Juan", "apellido":"Lopez","edad":"41","nacionalidad":"chilena"}
+    arbitros = Arbitro.objects.all()
+    data = {'arbitros':arbitros}
+    return render(request,'arbitro/vistaAr.html',data)
 
-    return render(request,'arbitro/vistaAr.html')
+def eliminarArbitro(request,id):
+    arbitro = Arbitro.objects.get(id = id)
+    arbitro.delete()
+    return redirect('vistaAr')
 

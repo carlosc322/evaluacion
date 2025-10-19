@@ -47,10 +47,10 @@
                 <section class="seccion" id="titulo">Panel de Administración</section>
                 
                 <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
                 <section></section>
             </nav>
 
@@ -60,100 +60,36 @@
                     <button class="btn-anadir"><a href="{% url 'ingresarEq' %}">Añadir Equipo</a></button>
                 </div>
 
-
                 <div class="grid-tarjetas">
-                        <!-- Tarjeta ejemplo -->
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">Nombre de equipo</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Cabecera -->
+                    <div class="tarjeta encabezado">
+                        <div class="col-numero-t">ID</div>
+                        <div class="col-texto-t">Nombre</div>
+                        <div class="col-textoo-t">Uniforme</div>
+                    </div>
 
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">Nombre de equipo</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
+                    <!-- Tarjetas dinámicas -->
+                    {% for equipo in equipos %}
+                    <div class="tarjeta">
+                        <div class="col-imagen">
+                            <img src="{% static 'css/estadio/img/imagen.jpg' %}" alt="Imagen">
                         </div>
-
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">nombre de Equipo</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
+                        <div class="col-numero">{{ equipo.id }}</div>
+                        <div class="col-texto">{{ equipo.nombre }}</div>
+                        <div class="col-texto">{{ equipo.uniforme }}</div>
+                        <div class="col-botones">
+                            <a href="" class="btn-opcion">Actualizar</a>
+                            <a href="{% url 'eliminarEquipo' equipo.id %}" class="btn-opcion eliminar">Eliminar</a>
                         </div>
-
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">Nombre de equipo</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">Título de la noticia</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">Título de la noticia</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tarjeta -->
-                        <div class="tarjeta">
-                            <img src="{% static 'css/equipo/img/imagen.jpg' %}" alt="Imagen">
-                            <div class="tarjeta-footer">
-                                <span class="titulo">Título de la noticia</span>
-                                <div class="botones-opciones">
-                                    <button class="btn-opcion">Actualizar</button>
-                                    <button class="btn-opcion eliminar">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- Repite la tarjeta cuantas veces necesites -->
+                    </div>
+                    {% endfor %}
                 </div>
+
             </div>
         </div>
-                    <footer id="footer">
-                <p class="pie">Pasion Deportiva 2025</p>
-            </footer>
+        <footer id="footer">
+            <p class="pie">Pasion Deportiva 2025</p>
+        </footer>
     </div> 
 </body>
 </html>

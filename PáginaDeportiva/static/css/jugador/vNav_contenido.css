@@ -1,6 +1,6 @@
 #nav_contenido{
 
-    width: 75%;
+    width: 85%;
     margin: auto;
     display: flex;
     gap: 7%;
@@ -16,6 +16,7 @@
     text-align: center;
     color: cornflowerblue;
     align-self: flex-start;
+    
     
 
   /* AÑADIR ESTO 👇 */

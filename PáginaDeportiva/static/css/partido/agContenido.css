@@ -38,10 +38,10 @@
 }
 /*----ESTO ES PARA INGRESAR LA FECHA----*/
 .formulario-equipo input[type="datetime-local"],
-.formulario-equipo input[type="color"] {
+.formulario-equipo input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
