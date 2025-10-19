@@ -44,13 +44,13 @@
         <div id="nav_contenido">
 
             <nav id="nav">
-                <section class="seccion ss1">Inicio  </section>
+                <button class="seccion ss1">Inicio  </button>
                 <section class="seccion" id="titulo">Panel de Administración</section>
             
                 <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="torneo"><a href="">Torneos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section></section>
             </nav>
@@ -63,21 +63,27 @@
                     <a href="{% url 'vistaEq' %}" class="btn-volver">⬅ Volver</a>
         
                     <!-- Formulario de Registro de Equipo -->
-                    <form class="formulario-equipo">
-                        
+                    <form class="formulario-equipo" method="POST">
+                        {% csrf_token %}
                         <!-- Nombre del equipo -->
-                        <label for="nombreEquipo">Nombre del equipo:</label>
-                        <input type="text" id="nombreEquipo" name="nombreEquipo" placeholder="Nombre..." required>
+                        <label for="nombre">Nombre del equipo:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre..." required>
+                        {% if form.nombre.errors %}
+                            <div class="error">{{ form.nombre.errors }}</div>
+                        {% endif %}
 
                         <!-- Uniforme (color) -->
-                        <label for="colorUniforme">Color del uniforme:</label>
-                        <input type="text" id="colorUniforme" name="colorUniforme" placeholder="Uniforme...">
+                        <label for="uniforme">Color del uniforme:</label>
+                        <input type="text" id="uniforme" name="uniforme" placeholder="Uniforme..."required>
+                        {% if form.uniforme.errors %}
+                            <div class="error">{{ form.uniforme.errors }}</div>
+                        {% endif %}
 
                         <!-- Botones -->
                         <div class="botones-formulario">
-                            <a href="#" class="btn guardar">Guardar</a>
-                            <a href="#" class="btn cancelar">Cancelar</a>
-                            <a href="#" class="btn borrador">Borrador</a>
+                            <button type="submit" class="btn guardar">Guardar</button>
+                            <button href="#" class="btn cancelar">Cancelar</button>
+                            <button href="#" class="btn borrador">Borrador</button>
                         </div>
                     </form>
                 </div>

@@ -1,24 +1,27 @@
 from django.urls import path
 
-from página_deportiva.views import ingresarEs, mostrarEs, fechaPartido, ingresarJugador, ingresarEquipo, ingresarArbitro
-from página_deportiva.views import verPartidos, verArbitro, verEquipos, verJugador
+from página_deportiva.views import ingresarEstadio, verEstadio,ingresarPartido, verPartido
+from página_deportiva.views import ingresarJugador, verJugador, ingresarEquipo, verEquipo, ingresarArbitro,verArbitro
 urlpatterns = [
 
-    path('ingresarEstadio/',ingresarEs, name='ingresarEs'),
-    path('vistaEstadio/',mostrarEs, name='vistaEs'),
+#ESTADIO-------------------------------------------------------
+    path('ingresarEstadio/',ingresarEstadio, name='ingresarEs'),
+    path('vistaEstadio/',verEstadio, name='vistaEs'),
 
-    path('fechaPartido/',fechaPartido, name='ingresarPa'),
-    path('vistaPartido',verPartidos, name='vistaPa'),
+#PARTIDO--------------------------------------------------------
+    path('ingresarPartido/',ingresarPartido, name='ingresarPa'),
+    path('vistaPartido/',verPartido, name='vistaPa'),
 
-
+#JUGADOR------------------------------------------------------
     path('ingresarJugador/',ingresarJugador, name='ingresarJu'),
     path('vistaJugador/',verJugador, name='vistaJu'),
 
+#EQUIPO-------------------------------------------------------
     path('ingresarEquipo/',ingresarEquipo, name='ingresarEq'),
-    path('vistaEquipo/',verEquipos, name='vistaEq'),
+    path('vistaEquipo/',verEquipo, name='vistaEq'),
 
-
-    path('ingresarArbitro',ingresarArbitro, name='ingresarAr'),
+#ARBITRO-----------------------------------------------------
+    path('ingresarArbitro/',ingresarArbitro, name='ingresarAr'),
     path('vistaArbitro/',verArbitro, name='vistaAr')
 
 ]

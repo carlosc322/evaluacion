@@ -44,14 +44,14 @@
         <div id="nav_contenido">
 
             <nav id="nav">
-                <section class="seccion ss1">Inicio  </section>
+                <button class="seccion ss1">Inicio  </button>
                 <section class="seccion" id="titulo">Panel de Administración</section>
                 
                 
                 <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="torneo"><a href="">Torneos <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section></section>
             </nav>
@@ -64,30 +64,46 @@
                     <a href="{% url 'vistaJu' %}" class="btn-volver">⬅ Volver</a>
         
                     <!-- Formulario de Registro de Equipo -->
-                    <form class="formulario-equipo">
-                        
+                    <form class="formulario-equipo" method="POST">
+                        {% csrf_token %}
+
                         <!-- Nombre del equipo -->
-                        <label for="nombreEquipo">Nombre del jugador:</label>
-                        <input type="text" id="nombreEq" name="nombreEquipo" placeholder="Nombre..." required>
+                        <label for="nombre">Nombre del jugador:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre..." required>
+                        {% if form.nombre.errors %}
+                            <div class="error">{{ form.nombre.errors }}</div>
+                        {% endif %}
 
                         <!-- Uniforme (color) -->
-                        <label for="apellidoEq">Apellido del jugador:</label>
-                        <input type="text" id="apellidoEq" name="apellidoEq" placeholder="Apellido...">
+                        <label for="apellido">Apellido del jugador:</label>
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido...">
+                        {% if form.apellido.errors %}
+                            <div class="error">{{ form.apellido.errors }}</div>
+                        {% endif %}
 
                         <label for="dorsal">Dorsal del jugador:</label>
-                        <input type="text" id="dorsal" name="dorsal" placeholder="Dorsal...">
+                        <input type="number" id="dorsal" name="dorsal" placeholder="Dorsal...">
+                        {% if form.dorsal.errors %}
+                            <div class="error">{{ form.dorsal.errors }}</div>
+                        {% endif %}
 
                         <label for="nacionalidad">Nacionalidad del jugador:</label>
                         <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad...">
+                        {% if form.nacionalidad.errors %}
+                            <div class="error">{{ form.nacionalidad.errors }}</div>
+                        {% endif %}
 
                         <label for="posicion">Posición de juego:</label>
                         <input type="text" id="posicion" name="posicion" placeholder="Posición...">
+                        {% if form.posicion.errors %}
+                            <div class="error">{{ form.posicion.errors }}</div>
+                        {% endif %}
 
                         <!-- Botones -->
                         <div class="botones-formulario">
-                            <a href="#" class="btn guardar">Guardar</a>
-                            <a href="#" class="btn cancelar">Cancelar</a>
-                            <a href="#" class="btn borrador">Borrador</a>
+                            <button type="submit" href="#" class="btn guardar">Guardar</button>
+                            <button href="#" class="btn cancelar">Cancelar</button>
+                            <button href="#" class="btn borrador">Borrador</button>
                         </div>
                     </form>
                 </div>

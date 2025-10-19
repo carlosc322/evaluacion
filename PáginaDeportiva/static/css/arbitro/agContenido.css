@@ -38,10 +38,10 @@
 }
 
 .formulario-equipo input[type="text"],
-.formulario-equipo input[type="color"] {
+.formulario-equipo input[type="number"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px; /*MANTENER DISTANCIA ENTRE EL MENSAJE DE ERROR Y EL INPUT*/
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -51,6 +51,13 @@
     height: 50px;
     border: none;
     padding: 0;
+}
+/*CONTROL DE ERRORES */
+
+.error ul {
+    color: red;
+    font-size: 10px;
+    margin-bottom: 10px;
 }
 
 /*.botones-formulario {
@@ -64,6 +71,7 @@
     border-radius: 5px;
     text-align: center;
     display: inline-block;
+    border: none;
 }
 
 .btn.guardar {

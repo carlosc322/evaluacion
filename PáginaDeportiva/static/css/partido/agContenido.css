@@ -1,0 +1,175 @@
+#container_contenido{/*TODO ESTO ES EL ESPACIO ENTRE LAS DOS CAJAS MENU Y contenido*/
+    margin: auto;
+    padding: 20px 40px;
+    padding-bottom: 60px;
+    height: 100%;
+    border-radius: 6px;
+    background-color: rgb(237, 237, 227);
+    width: 60%;
+    text-align: center;
+}
+
+
+.btn-volver {
+    border-radius: 4px;
+    padding: 7px 10px;
+    background-color: rgb(245, 245, 235);
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    
+}
+
+.formulario-equipo {
+    margin: auto;
+    width: 84%;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-equipo label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+/*----ESTO ES PARA INGRESAR LA FECHA----*/
+.formulario-equipo input[type="datetime-local"],
+.formulario-equipo input[type="color"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+/*---ESTO ES PARA INGRESAR LOS DEMAS DATOS---*/
+.formulario-equipo input[type="datetime-local"],
+.formulario-equipo input[type="color"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 4px; /*DISTANCIA ENTRE EL MENSAJE DE ERROR Y EL INPUT*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.formulario-equipo input[type="color"] {
+    height: 50px;
+    border: none;
+    padding: 0;
+}
+
+/*CONTROL DE ERRORES */
+
+.error ul {
+    color: red;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+/*.botones-formulario {
+    
+}*/
+
+.btn {
+    padding: 7px 13px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    border: none;
+}
+
+.btn.guardar {
+    background-color: #4CAF50;
+}
+
+.btn.cancelar {
+    background-color: #f44336;
+}
+
+.btn.borrador {
+    background-color: #2196F3;
+}
+
+/*----------*/
+#daatos h3{
+    margin: 20px;
+    padding: 0em 2em;
+    color: white;
+    
+    background-color: rgb(150, 141, 129);
+}
+
+hr{
+    margin-top: 10px;
+    height: 4px;
+    background: #333;
+
+}
+
+#tituloE{
+    margin: 0
+}
+#tituloE{
+    font-weight: 100;
+}
+
+/*BOTON Y BUSCADOR----->FILTRO*/
+.contenedor-buscador {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    height: 50px; /*Con esto podemos controlar el contenedor del buscador*/
+
+}
+
+.buscador-grupo {
+    display: flex;
+    align-items: center;
+    width: 85%;
+}
+.buscador-grupo input {
+    border-radius: none;
+}
+
+/* INPUT sin bordes ni border-radius */
+.campo-busqueda {
+    margin-top: 20px;/*Para el buscador moverlo hacia abajo o arriba*/
+    font-size: 11px;
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+
+
+/* BOTÓN a la derecha, mismo alto que el input */
+.btn-buscar {
+    background-color: #ada3a3;
+    border: none;
+    padding: 0 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 68%;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.btn-buscar:hover {
+    background-color: #988e8e;
+}
+
+/* Imagen dentro del botón si usas una lupa */
+.btn-buscar img {
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+}
