@@ -1,73 +1,11 @@
-#nav_contenido{
-
-    width: 75%;
+hr{
+    width: 100%;                /* o el ancho que prefieras */
     margin: auto;
-    display: flex;
-    gap: 7%;
-    align-items: flex-start; /* Alinea los hijos al inicio en vertical */
+    margin-bottom: 50px;        /* centra horizontalmente */
+    border: none;              /* elimina el borde por defecto */
+    height: 3px;               /* grosor de la línea */
+    background-color: #8c8585;    /* color de la línea */
 
-}
-
-#nav {
-    border-radius: 0px;
-    width: 25%;
-    padding: 15px 10px;
-    background-color: rgb(237, 237, 227);
-    text-align: center;
-    color: cornflowerblue;
-    align-self: flex-start;
-    
-
-  /* AÑADIR ESTO 👇 */
-    display: flex;
-    flex-direction: column;
-  align-items: center; /* Centra horizontalmente */
-}
-
-
-#nav .ss1 {
-    width: 100%;
-    display: inline-block;     /* Hace que el botón se adapte al contenido */
-    padding: 12px 15px;        /* Espaciado interno */
-    background-color:white;
-    border-radius: 7px;
-    margin-bottom: 10px;
-    color: purple;
-    font-weight: 500;
-    letter-spacing: 1px;       /* Espaciado entre letras */
-    white-space: nowrap;       /* Previene salto de línea */
-    overflow: hidden;          /* Oculta lo que sobresale */
-    text-overflow: ellipsis;   /* Agrega "..." si el texto es muy largo */
-    border-bottom: 2px solid #333;
-}
-
-#nav .ss1:hover {
-    background-color: beige; /* Un poco más claro al pasar el mouse */
-}
-
-#nav .seccion{
-    border-bottom: 1px solid black;
-}
-
-a{
-    text-decoration: none;
-}
-
-a i {
-    margin-left: 10%;
-    vertical-align: middle;
-    font-size: 1em; /* ajusta si el ícono se ve muy grande */
-}
-
-#titulo{ /*es la cabeza del menu*/
-    width: 100%;
-    border-radius: 7px;
-    color: rgb(255, 255, 255);
-    padding: 15px 30px;
-    background-color:#423f3f;
-    margin-bottom: 20px;
-    border-bottom: 1px solid white;
-    letter-spacing: 1px; 
-    overflow: hidden;          /* Oculta lo que sobresale */
-    display: inline-block;     /* Hace que el botón se adapte al contenido */
+    /* sombra */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }

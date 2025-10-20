@@ -22,14 +22,14 @@
 
             <!-- ✅ Etiqueta que actúa como botón de menú -->
             <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">User Name</div>
-                <img src="{% static 'css/jugador/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+                <div class="userName">{{user.username}}</div>
+                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
             </label>
 
                 <!-- ✅ Menú desplegable -->
             <div class="dropdown">
                 <a href="#">Ver perfil</a>
-                <a href="#">Cerrar sesión</a>
+                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
             </div>
     </div>
 </header>
@@ -43,54 +43,57 @@
         <div id="nav_contenido">
 
             <nav id="nav">
-                <button class="seccion ss1">Inicio  </button>
+                <a type="submit" class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
             
-                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
                 <section></section>
             </nav>
 
             <div id="container_contenido">
                 <div class="barra-superior">
                     <input type="text" placeholder="Filtrar jugador..." class="buscador">
-                    <button class="btn-anadir"><a href="{% url 'ingresarJu' %}">Añadir Jugador</a></button>
+                    <a type="submit" class="btn-anadir" href="{% url 'ingresarJu' %}">Añadir Jugador</a>
                 </div>
 
                 <!-- Contenedor de tarjetas -->
-                <div class="grid-tarjetas">
-                    <!-- Cabecera -->
-                    <div class="tarjeta encabezado">
-                        <div class="col-numero-n1">ID</div>
-                        <div class="col-texto-t1">Nombre</div>
-                        <div class="col-texto-t2">Apellido</div>
-                        <div class="col-numero-n2">Dorsal</div>
-                        <div class="col-texto-t3">Nacionalidad</div>
-                        <div class="col-texto-t4">Posición</div>
-                    </div>
+<div class="grid-tarjetas">
+    <!-- Cabecera -->
+    <div class="tarjeta encabezado">
+        <div class="col-imagen"></div>
+        <div class="col-numero">ID</div>
+        <div class="col-texto">Nombre</div>
+        <div class="col-texto">Apellido</div>
+        <div class="col-numero">Dorsal</div>
+        <div class="col-texto">Nacionalidad</div>
+        <div class="col-texto">Posición</div>
+        <div class="col-botones"></div>
+    </div>
 
-                    <!-- Tarjetas dinámicas -->
-                    {% for jugador in jugadores %}
-                    <div class="tarjeta">
-                        <div class="col-imagen">
-                            <img src="{% static 'css/estadio/img/imagen.jpg' %}" alt="Imagen">
-                        </div>
-                        <div class="col-numero">{{ jugador.id }}</div>
-                        <div class="col-texto">{{ jugador.nombre }}</div>
-                        <div class="col-texto">{{ jugador.apellido }}</div>
-                        <div class="col-numero">{{ jugador.dorsal }}</div>
-                        <div class="col-texto">{{ jugador.nacionalidad }}</div>
-                        <div class="col-texto">{{ jugador.posicion }}</div>
-                        <div class="col-botones">
-                            <a href="" class="btn-opcion">Actualizar</a>
-                            <a href="{% url 'eliminarJugador' jugador.id %}" class="btn-opcion eliminar">Eliminar</a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+    <!-- Tarjetas dinámicas -->
+    {% for jugador in jugadores %}
+    <div class="tarjeta">
+        <div class="col-imagen">
+            <img src="{% static 'css/jugador/img/jugador.jpg' %}" alt="Imagen">
+        </div>
+        <div class="col-numero">{{ jugador.id }}</div>
+        <div class="col-texto">{{ jugador.nombre }}</div>
+        <div class="col-texto">{{ jugador.apellido }}</div>
+        <div class="col-numero">{{ jugador.dorsal }}</div>
+        <div class="col-texto">{{ jugador.nacionalidad }}</div>
+        <div class="col-texto">{{ jugador.posicion }}</div>
+        <div class="col-botones">
+            <a href="{% url 'actualizarJugador' jugador.id %}" class="btn-opcion">Actualizar</a>
+            <a href="{% url 'eliminarJugador' jugador.id %}" class="btn-opcion eliminar">Eliminar</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
             </div>
         </div>
         <footer id="footer">

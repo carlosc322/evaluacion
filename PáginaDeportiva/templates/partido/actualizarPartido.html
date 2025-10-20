@@ -67,7 +67,7 @@
                         {% csrf_token %}
                         
                         <label for="fecha">Ingresar fecha del partido:</label>
-                        <input type="datetime-local" id="fecha" name="fecha" placeholder="fecha...">
+                        <input type="datetime-local" id="fecha" name="fecha" value="{{ form.fecha.value|default_if_none:'' }}" required>
                         {% if form.fecha.errors %}
                             <div class="error">{{ form.fecha.errors }}</div>
                         {% endif %}
@@ -75,7 +75,7 @@
                         <!-- Botones -->
                         <div class="botones-formulario">
                             <button href="#" class="btn guardar">Guardar</button>
-                            <button href="#" class="btn cancelar">Cancelar</button>
+                            <button type="button" class="btn cancelar" onclick="window.history.back();">Cancelar</button>
                         </div>
                         <hr>
                         <div id="daatos"><h3>DATOS DEL PARTIDO</h3></div>

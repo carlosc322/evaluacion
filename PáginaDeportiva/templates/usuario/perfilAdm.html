@@ -13,71 +13,38 @@
 
 </head>
 <body>
-<header>
-    <div class="contenedor">
-        <div id="icono" class="icon-ball">Pasión Deportiva</div>
-
-            <!-- ✅ Checkbox para controlar el menú (oculto) -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-            <!-- ✅ Etiqueta que actúa como botón de menú -->
-            <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">User Name</div>
-                <img src="{% static 'css/usuario/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
-            </label>
-
-            <!-- ✅ Menú desplegable -->
-        <div class="dropdown">
-            <a href="#">Ver perfil</a>
-            <a href="#">Cerrar sesión</a>
+    <header>
+        <div class="contenedor">
+            <h1 id="icono" class="icon-ball">Pasión Deportiva</h1>
         </div>
-    </div>
-</header>
-    <div id="espacio">
+    </header>
 
-    </div>
-
-        
     <div id="presentacion">
-        <div id="bienvenida"></div>
-        <div id="nav_contenido">
-
-            <nav id="nav">
-                <button class="seccion ss1">Inicio  </button>
-                <section class="seccion" id="titulo">Panel de Administración</section>
-                
-                <section class="seccion ss1" id="noticia"><a href="tituloD">Noticias <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
-                <section></section>
-            </nav>
-
-            <div id="contenido">
-                <div id="tituloD">Noticias</div>
-                <form method="POST" enctype="multipart/form-data">
-                        <label for="titulo">Título:</label><br>
-                        <input type="text" name="titulo" required><br><br>
-
-                        <label for="imagen">Imagen:</label><br>
-                        <input type="file" name="imagen" accept="image/*"><br><br>
-
-                        <label for="contenido">Contenido:</label><br>
-                        <textarea name="contenido" rows="10" cols="50" required></textarea><br><br>
-
-                        <div id="botones">
-                            <button id="btn1" type="submit">Publicar</button>
-                            <button id="btn2" type="submit">Cancelar</button>
-                            <button id="btn3" type="submit">Borrador</button>
-                        </div>
-                    </form>
-            </div>
+        <hr>
+        <div class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Entrar</button>
+                {% if error %}
+                <p style="color:red">{{error}}</p>
+                {% endif %}
+            </form>
         </div>
+
         <footer id="footer">
             <p class="pie">Pasion Deportiva 2025</p>
         </footer>
     </div> 
+
+
 </body>
 </html>

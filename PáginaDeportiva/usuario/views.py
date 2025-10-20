@@ -1,33 +1,23 @@
-from django.shortcuts import render
-from django.urls import include
-
-# Create your views here.
-def registrarse(request):
-    if request.method == 'POST':
-        nombreUser = request.POST.get('username')
-        correoUser = request.POST.get('mail')
-        contrasena = request.POST.get('password')
-
-        users = {'username': 'juan','mail': 'juan@gmail.com','password':'12345'}
-        
-        return render(request, 'usuario/perfilAdm.html',{'user': users})
-
-    return render(request, 'usuario/registro.html')
-
-
-def login(request):
-        if request.method == 'POST':
-            nombreUser = request.POST.get('username')
-            contrasena = request.POST.get('password')
-
-            users = {'username': 'juan','mail': 'juan@gmail.com','password':'12345'}
-            
-            return render(request, 'usuario/perfilAdm.html',{'user': users})
-        return render(request, 'usuario/login.html')
-
-def perfil(request):
-    return render(request, 'usuario/perfil.html')
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def perfilAdm(request):
-    data = {'nombre':'Brayan', 'correo':'brayan01@gmail.com', 'contrasena':'123456'}
-    return render(request, 'usuario/perfilAdm.html',data)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request,user)
+            return redirect('inicioAdmin')
+        else:
+            return render(request, 'perfilAdm.html',{'error':'Credenciales invalidas'})
+    return render(request, 'usuario/perfilAdm.html')
+
+@login_required
+def inicioAdmin(request):
+    return render(request,'usuario/inicio.html')
+

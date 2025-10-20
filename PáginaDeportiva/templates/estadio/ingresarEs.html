@@ -22,14 +22,14 @@
 
             <!-- ✅ Etiqueta que actúa como botón de menú -->
             <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">User Name</div>
-                <img src="{% static 'css/estadio/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+                <div class="userName">{{user.username}}</div>
+                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
             </label>
 
                 <!-- ✅ Menú desplegable -->
             <div class="dropdown">
                 <a href="#">Ver perfil</a>
-                <a href="#">Cerrar sesión</a>
+                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
             </div>
     </div>
 </header>
@@ -43,13 +43,13 @@
         <div id="nav_contenido">
 
             <nav id="nav">
-                <button class="seccion ss1">Inicio  </button>
+                <a type="submit" class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
                 
                 
                 <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
             </nav>
@@ -67,13 +67,15 @@
                         
                         <!-- Nombre del equipo -->
                         <label for="nombre">Nombre del estadio:</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre..." required>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre..." required value="{{ form.nombre.value|default_if_none:'' }}">
+                        
                         {% if form.nombre.errors %}
                             <div class="error">{{ form.nombre.errors }}</div>
                         {% endif %}
 
                         <label for="capacidad">Capacidad del estadio:</label>
-                        <input type="number" id="capacidad" name="capacidad" placeholder="capacidad..."required>
+                        <input type="number" id="capacidad" name="capacidad" placeholder="capacidad..."required value="{{ form.nombre.value|default_if_none:'' }}">
+                        
                         {% if form.capacidad.errors %}
                             <div class="error">{{ form.capacidad.errors }}</div>
                         {% endif %}
@@ -82,7 +84,6 @@
                         <div class="botones-formulario">
                             <button  class="btn guardar">Guardar</button>
                             <button  class="btn cancelar">Cancelar</button>
-                            <button  class="btn borrador">Borrador</button>
                         </div>
                     </form>
                 </div>

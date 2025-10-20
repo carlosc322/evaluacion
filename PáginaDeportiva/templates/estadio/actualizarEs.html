@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>perfil</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/estadio/vIndice.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estadio/agIndice.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/estadio/fontello.css' %}">
 
@@ -46,46 +46,46 @@
                 <a type="submit" class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
                 
+                
                 <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
+                <section class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
             </nav>
 
-            <div id="container_contenido">
-                <div class="barra-superior">
-                    <input type="text" placeholder="Buscar estadio..." class="buscador">
-                    <a type="submit" class="btn-anadir" href="{% url 'ingresarEs' %}">Añadir Estadio</a>
-                </div>
 
-                <!-- Contenedor de tarjetas -->
-                <div class="grid-tarjetas">
-                    <!-- Cabecera -->
-                    <div class="tarjeta encabezado">
-                        <div class="col-imagen"></div>
-                        <div class="col-numero">ID</div>
-                        <div class="col-texto">Nombre</div>
-                        <div class="col-numero">Capacidad</div>
-                        <div class="col-botones"></div>
-                    </div>
-                    <!-- Tarjetas dinámicas -->
-                    {% for estadio in estadios %}
-                    <div class="tarjeta">
-                        <div class="col-imagen">
-                            <img src="{% static 'css/estadio/img/estadio.jpg' %}" alt="Imagen">
+                <!-- Dentro del div con id="container_contenido" -->
+                <div id="container_contenido">
+
+                    <!-- Botón Volver -->
+                    <a href="{% url 'vistaEs' %}" class="btn-volver">⬅ Volver</a>
+        
+                    <!-- Formulario de Registro de Equipo -->
+                    <form method="POST" class="formulario-equipo">
+                        {% csrf_token %}
+
+                        <!-- Nombre -->
+                        <label for="nombre">Nombre del estadio:</label>
+                        <input type="text" id="nombre" name="nombre" value="{{ form.nombre.value|default_if_none:'' }}" required>
+                        {% if form.nombre.errors %}
+                            <div class="error">{{ form.nombre.errors }}</div>
+                        {% endif %}
+
+                        <!-- Capacidad -->
+                        <label for="capacidad">Capacidad del estadio:</label>
+                        <input type="number" id="capacidad" name="capacidad" value="{{ form.capacidad.value|default_if_none:'' }}" required>
+                        {% if form.capacidad.errors %}
+                            <div class="error">{{ form.capacidad.errors }}</div>
+                        {% endif %}
+
+                        <!-- Botones -->
+                        <div class="botones-formulario">
+                            <button type="submit" class="btn guardar">Guardar</button>
+                            <button type="button" class="btn cancelar" onclick="window.history.back();">Cancelar</button>
                         </div>
-                        <div class="col-numero">{{ estadio.id }}</div>
-                        <div class="col-texto">{{ estadio.nombre }}</div>
-                        <div class="col-numero">{{ estadio.capacidad }}</div>
-                        <div class="col-botones">
-                            <a href="{% url 'actualizarEs' estadio.id %}" class="btn-opcion">Actualizar</a>
-                            <a href="{% url 'eliminarEstadio' estadio.id %}" class="btn-opcion eliminar">Eliminar</a>
-                        </div>
-                    </div>
-                    {% endfor %}
+                    </form>
                 </div>
-            </div>
         </div>
                     <footer id="footer">
                 <p class="pie">Pasion Deportiva 2025</p>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 #En views.py SE AGREGAN LOS DATOS A LA db
@@ -36,6 +36,27 @@ def eliminarEstadio(request,id):
     estadio.delete()
     return redirect('vistaEs')#'vistaEs' viene de url.py --> name='vistaEs'
 
+
+
+def actualizarEstadio(request, id):
+    estadio = get_object_or_404(Estadio, id=id)  
+    if request.method == 'POST':          
+        form = FormEstadio(request.POST)  
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            capacidad = form.cleaned_data['capacidad']
+            estadio.nombre = nombre
+            estadio.capacidad = capacidad
+            estadio.save()                   
+            return redirect('vistaEs')
+    else:
+        form = FormEstadio(initial={
+            'nombre': estadio.nombre,
+            'capacidad': estadio.capacidad
+            })
+    return render(request, 'estadio/actualizarEs.html',{'form':form})
+
+
 #PARTIDO-----------------------------------------------
 
 from página_deportiva.forms import FormPartido
@@ -64,6 +85,21 @@ def eliminarPartido(request,id):
     partido = Partido.objects.get(id = id)
     partido.delete()
     return redirect('vistaPa') #'vistaPa' viene de url.py --> name='vistaPa'
+
+def actualizarPartido(request,id):
+    partido = get_object_or_404(Partido, id=id)
+    if request.method =='POST':
+        form = FormPartido(request.POST)
+        if form.is_valid():
+            fecha = form.cleaned_data['fecha']
+            partido.fecha = fecha
+            partido.save()
+            return redirect('vistaPa')
+    else:
+        form = FormPartido(initial={
+            'fecha': partido.fecha
+        })
+    return render(request, 'partido/actualizarPartido.html',{'form':form})
 
 #JUGADOR
 from página_deportiva.forms import FormJugador
@@ -98,6 +134,34 @@ def eliminarJugador(request,id):
     jugador = Jugador.objects.get(id = id)
     jugador.delete()
     return redirect('vistaJu')
+
+def actualizarJugador(request,id):
+    jugador = get_object_or_404(Jugador, id = id)
+    if request.method == 'POST':
+        form = FormJugador(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
+            dorsal = form.cleaned_data['dorsal']
+            nacionalidad = form.cleaned_data['nacionalidad']
+            posicion = form.cleaned_data['posicion']
+            jugador.nombre = nombre
+            jugador.apellido = apellido
+            jugador.dorsal = dorsal
+            jugador.nacionalidad = nacionalidad
+            jugador.posicion = posicion
+            jugador.save()
+            return redirect('vistaJu')
+    else:
+        form = FormJugador(initial={
+            'nombre': jugador.nombre,
+            'apellido': jugador.apellido,
+            'dorsal': jugador.dorsal,
+            'nacionalidad': jugador.nacionalidad,
+            'posicion': jugador.posicion
+        })
+    return render(request, 'jugador/actualizarJugador.html',{'form':form})
+
 
 
 #EQUIPO------------------------------------------------
@@ -137,6 +201,26 @@ def eliminarEquipo(request,id):
     equipo.delete()
     return redirect('vistaEq')
 
+def actualizarEquipo(request,id):
+    equipo = get_object_or_404(Equipo, id = id)
+    if request.method == 'POST':
+        form = FormEquipo(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            uniforme =form.cleaned_data['uniforme']
+            equipo.nombre = nombre
+            equipo.uniforme = uniforme
+            equipo.save()
+            return redirect('vistaEq')
+    else:
+        form = FormEquipo(initial={
+            'nombre': equipo.nombre,
+            'uniforme': equipo.uniforme
+        })
+    return render(request,'equipo/actualizarEquipo.html',{'form':form})
+
+
+
 #ARBITRO----------------------------------------------------
 
 from página_deportiva.forms import FormArbitro
@@ -174,4 +258,29 @@ def eliminarArbitro(request,id):
     arbitro = Arbitro.objects.get(id = id)
     arbitro.delete()
     return redirect('vistaAr')
+
+def actualizarArbitro(request,id):
+    arbitro = get_object_or_404(Arbitro, id = id)
+    if request.method == 'POST':
+        form = FormArbitro(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
+            edad = form.cleaned_data['edad']
+            nacionalidad = form.cleaned_data['nacionalidad']
+            arbitro.nombre = nombre
+            arbitro.apellido = apellido
+            arbitro.edad = edad
+            arbitro.nacionalidad = nacionalidad
+            arbitro.save()
+            return redirect('vistaAr')
+    else:
+        form = FormArbitro(initial={
+            'nombre': arbitro.nombre,
+            'apellido': arbitro.apellido,
+            'edad': arbitro.edad,
+            'nacionalidad': arbitro.nacionalidad
+        })
+    return render(request,'arbitro/actualizarArbitro.html',{'form':form})
+
 

@@ -22,14 +22,14 @@
 
             <!-- ✅ Etiqueta que actúa como botón de menú -->
             <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">User Name</div>
-                <img src="{% static 'css/partido/img/imagen.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+                <div class="userName">{{user.username}}</div>
+                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
             </label>
 
                 <!-- ✅ Menú desplegable -->
             <div class="dropdown">
                 <a href="#">Ver perfil</a>
-                <a href="#">Cerrar sesión</a>
+                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
             </div>
     </div>
 </header>
@@ -43,21 +43,21 @@
         <div id="nav_contenido">
 
             <nav id="nav">
-                <section class="seccion ss1">Inicio  </section>
+                <a class="seccion ss1" type="submit" href="{% url 'inicioAdmin' %}">Inicio</a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
             
-                <section class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitro <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadio <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
-                <section class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
                 <section></section>
             </nav>
 
             <div id="container_contenido">
                 <div class="barra-superior">
                     <input type="text" placeholder="Filtrar partido..." class="buscador">
-                    <button class="btn-anadir"><a href="{% url 'ingresarPa' %}">Añadir Partido</a></button>
+                    <a type="submit" class="btn-anadir" href="{% url 'ingresarPa' %}">Añadir Partido</a>
                 </div>
 
                 <div class="grid-tarjetas">
@@ -65,20 +65,20 @@
                     <div class="tarjeta">
                         
                         <!-- Imagen izquierda -->
-                        <img class="imagen-equipo" src="{% static 'css/partido/img/imagen.jpg' %}" alt="Imagen Equipo 1">
+                        <img class="imagen-equipo" src="{% static 'css/partido/img/partido.jpg' %}" alt="Imagen Equipo 1">
                         
                         <!-- Texto centrado -->
                         <div class="info-textos">
-                            <span class="titulo">NOMBRE PARTIDO</span>
+                            <span class="titulo">FECHA</span>
                             <span class="subtitulo">{{ partido.fecha }}</span>
                         </div>
                         
                         <!-- Imagen derecha -->
-                        <img class="imagen-equipo" src="{% static 'css/partido/img/imagen.jpg' %}" alt="Imagen Equipo 2">
+                        <img class="imagen-equipo" src="{% static 'css/partido/img/partido.jpg' %}" alt="Imagen Equipo 2">
                         
                         <!-- Botones -->
                         <div class="botones-opciones">
-                            <a href="" class="btn-opcion">Actualizar</a>
+                            <a href="{% url 'actualizarPartido' partido.id %}" class="btn-opcion">Actualizar</a>
                             <a href="{% url 'eliminarPartido' partido.id %}" class="btn-opcion eliminar">Eliminar</a>
                         </div>
                     </div>

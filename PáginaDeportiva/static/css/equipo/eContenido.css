@@ -47,77 +47,76 @@
 
 }
 
-/* Grid de tarjetas */
-/* Contenedor de tarjetas */
+/* Contenedor general de todas las tarjetas */
 .grid-tarjetas {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 8px; /* Espacio entre cada tarjeta */
 }
 
-/* Tarjeta general y cabecera */
+/* Tarjeta individual (fila de datos o encabezado) */
 .tarjeta,
 .tarjeta.encabezado {
     display: grid;
-    grid-template-columns: 50px 50px 2fr 2fr auto;
+    grid-template-columns:
+        50px   /* Imagen */
+        40px   /* ID */
+        250px  /* Nombre */
+        120px  /* Apellido */
+        auto;  /* Botones */
     align-items: center;
     padding: 6px 8px;
     padding-bottom: 1px;
 }
+
 .tarjeta{
     background-color: white;
 }
 
-/* Cabecera */
+/* Estilo especial para la fila de encabezado */
 .tarjeta.encabezado {
-    background-color: #f0f0e6;
-    font-weight: bold;
+    background-color: transparent;
     box-shadow: none;
-    border-radius: 6px;
+    font-weight: bold;
     color: #333;
-    padding-bottom: 1px;
-    width: 100%;
+    padding: 5px 8px;
 }
 
-.col-numero-t{
-    margin-left: 64px;
-}
-
-.col-texto-t{
-    margin-left: 7.5em;
-}
-.col-textoo-t{
-    margin-left: 16.5em;
-}
-
-/* Imagen */
+/* Imagen de cada árbitro */
 .col-imagen img {
     width: 2.8em;
     height: 2.8em;
     object-fit: cover;
     border-radius: 3px;
-    
 }
 
-/* Texto */
-.col-texto, .col-numero {
+/* Columnas de texto */
+.col-texto {
     font-size: 14px;
     color: #333;
     padding: 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: center;
 }
 
-/* Botones */
+/* Columnas numéricas (ID, Edad) */
+.col-numero {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    padding: 3px;
+    white-space: nowrap;
+}
+
+/* Columna de botones */
 .col-botones {
     margin-left: auto;
     display: flex;
     gap: 8px;
 }
 
-/* Botón estilo */
+/* Estilo base de los botones */
 .btn-opcion {
     padding: 4px 9px;
     font-size: 12px;
@@ -134,6 +133,7 @@
     color: white;
 }
 
+/* Botón de eliminar en rojo */
 .btn-opcion.eliminar {
     border-color: #f44336;
     color: #f44336;

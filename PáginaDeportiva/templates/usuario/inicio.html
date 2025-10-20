@@ -6,12 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>perfil</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/partido/agIndice.css' %}
-">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/arbitro/viIndice.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/partido/fontello.css' %}">
-
-
+    <link rel="stylesheet" href="{% static 'css/arbitro/fontello.css' %}">
 </head>
 <body>
 <header>
@@ -33,6 +30,7 @@
                 <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
             </div>
     </div>
+
 </header>
     <div id="espacio">
 
@@ -44,7 +42,7 @@
         <div id="nav_contenido">
 
             <nav id="nav">
-                <a class="seccion ss1" type="submit" href="{% url 'inicioAdmin' %}">Inicio</a>
+                <a href="{% url 'inicioAdmin' %}" type="submit" class="seccion ss1">Inicio </a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
                 
                 <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
@@ -52,41 +50,18 @@
                 <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
                 <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-                <section></section>
             </nav>
 
+            <div id="container_contenido" style="padding: 13em 5em;">
+                <h1 style="color: #333; letter-spacing: 2px;">BIENVENIDO AL MENÚ DE INICIO</h1>
+                <div class="icon-ball"></div>
 
-                <!-- Dentro del div con id="container_contenido" -->
-                <div id="container_contenido">
 
-                    <!-- Botón Volver -->
-                    <a href="{% url 'vistaPa' %}" class="btn-volver">⬅ Volver</a>
-        
-                    <!-- Formulario de Registro de Equipo -->
-                    <form class="formulario-equipo" method="POST">
-                        {% csrf_token %}
-                        
-                        <label for="fecha">Ingresar fecha del partido:</label>
-                        <input type="datetime-local" id="fecha" name="fecha" placeholder="fecha...">
-                        {% if form.fecha.errors %}
-                            <div class="error">{{ form.fecha.errors }}</div>
-                        {% endif %}
-
-                        <!-- Botones -->
-                        <div class="botones-formulario">
-                            <button href="#" class="btn guardar">Guardar</button>
-                            <button href="#" class="btn cancelar">Cancelar</button>
-                        </div>
-                        <hr>
-                        <div id="daatos"><h3>DATOS DEL PARTIDO</h3></div>
-                        <!-- Uniforme (color) -->
-                    </form>
-                </div>
-
+            </div>
         </div>
-                    <footer id="footer">
-                <p class="pie">Pasion Deportiva 2025</p>
-            </footer>
+        <footer id="footer">
+            <p class="pie">Pasion Deportiva 2025</p>
+        </footer>
     </div> 
 </body>
 </html>

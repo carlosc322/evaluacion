@@ -4,7 +4,7 @@
     padding: 10px;
     
     background-color: rgb(237, 237, 227);
-    width: 70%;
+    width: 60%;
     text-align: center;
 }
 .barra-superior {
@@ -47,14 +47,14 @@
 
 }
 
-/* Contenedor de tarjetas */
+/* Contenedor general */
 .grid-tarjetas {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-/* Misma estructura de columnas */
+/* Tarjeta individual y encabezado */
 .tarjeta,
 .tarjeta.encabezado {
     display: grid;
@@ -62,55 +62,27 @@
         50px   /* Imagen */
         35px   /* ID */
         100px  /* Nombre */
-        100px  /* Apellido */
-        70px   /* Dorsal */
-        120px  /* Nacionalidad */
+        110px  /* Apellido */
+        60px   /* Dorsal */
+        130px  /* Nacionalidad */
         100px  /* Posición */
         auto;  /* Botones */
     align-items: center;
     padding: 6px 8px;
     padding-bottom: 1px;
-    background-color: #4CAF50;
 }
-
-
 .tarjeta{
     background-color: white;
 }
 
-/* Estilo para la cabecera */
+/* Encabezado especial */
 .tarjeta.encabezado {
-    background-color: #f0f0e6;
-    font-weight: bold;
+    background-color: transparent;
     box-shadow: none;
-    border-radius: 6px;
+    font-weight: bold;
     color: #333;
-    width: 85%;
+    padding: 5px 8px;
 }
-
-.col-numero-n1{
-    margin-left: 3.6em;
-
-}
-.col-numero-n2{
-    margin-left: 7em;
-}
-.col-texto-t1{
-    margin-left: 3.6em;
-
-}
-.col-texto-t2{
-    margin-left: 7.2em;
-    
-}
-.col-texto-t3{
-    margin-left: 5em;
-}
-.col-texto-t4{
-    margin-left: 8.4em;
-    
-}
-
 
 /* Imagen */
 .col-imagen img {
@@ -121,16 +93,23 @@
 }
 
 /* Texto */
-.col-texto, .col-numero {
+.col-texto {
     font-size: 14px;
     color: #333;
     padding: 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: center;
 }
 
+/* Números (ID, dorsal) */
+.col-numero {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    padding: 3px;
+    white-space: nowrap;
+}
 
 /* Botones */
 .col-botones {
@@ -139,7 +118,7 @@
     gap: 8px;
 }
 
-/* Botón estilo */
+/* Estilo botones */
 .btn-opcion {
     padding: 4px 9px;
     font-size: 12px;

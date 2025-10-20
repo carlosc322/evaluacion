@@ -71,9 +71,11 @@
     padding: 6px 8px;
     padding-bottom: 1px;
 }
+
 .tarjeta{
     background-color: white;
 }
+
 
 /* Estilo especial para la fila de encabezado */
 .tarjeta.encabezado {

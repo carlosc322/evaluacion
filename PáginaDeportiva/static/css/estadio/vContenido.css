@@ -15,6 +15,7 @@
     background-color: #f0eee5;
     padding: 15px;
     padding-bottom: 6px;
+    border-radius: 3px;
     border-bottom: 15px solid white;
     margin-bottom: 10px;
     
@@ -66,11 +67,12 @@
         120px  /* Capacidad */
         auto;  /* Botones */
     align-items: center;
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 6px 8px;
-    transition: 0.3s;
+    padding-bottom: 1px;
+}
+
+.tarjeta{
+    background-color: white;
 }
 
 /* Cabecera */
