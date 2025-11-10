@@ -66,9 +66,10 @@ def ingresarPartido(request):
     if request.method == 'POST':
         form = FormPartido(request.POST)
         if form.is_valid():
-            fecha = form.cleaned_data['fecha']
+            """fecha = form.cleaned_data['fecha']
             nueva_fecha = Partido(fecha=fecha)
-            nueva_fecha.save()
+            nueva_fecha.save()"""
+            form.save()
             return redirect('/paginaDeportiva/vistaPartido/')
         else:
             return render(request,'partido/ingresarPa.html',{'form':form})
@@ -106,9 +107,11 @@ from página_deportiva.forms import FormJugador
 from página_deportiva.models import Jugador
 
 def ingresarJugador(request):
+    form = FormJugador()
     if request.method == 'POST':
         form = FormJugador(request.POST)
         if form.is_valid():
+            """
             nombre = form.cleaned_data['nombre'].title()
             apellido = form.cleaned_data['apellido'].title()
             dorsal = form.cleaned_data['dorsal']
@@ -116,8 +119,9 @@ def ingresarJugador(request):
             posicion = form.cleaned_data['posicion'].title()
 
             nuevo_jugador = Jugador(nombre = nombre, apellido = apellido,dorsal = dorsal,nacionalidad = nacionalidad,posicion = posicion)
-            
             nuevo_jugador.save()
+            """
+            form.save()
             return redirect('/paginaDeportiva/vistaJugador/')
         else:
             return render(request,'jugador/ingresarJu.html',{'form':form})
@@ -283,4 +287,5 @@ def actualizarArbitro(request,id):
         })
     return render(request,'arbitro/actualizarArbitro.html',{'form':form})
 
-
+def loginn(request):
+    return render(request,'usuario/perfilAdm.html')

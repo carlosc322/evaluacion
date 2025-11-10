@@ -1,67 +1,35 @@
-<!DOCTYPE html>
+{% extends 'aBase/base.html' %}
+
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/arbitro/viIndice.css' %}">
+{% block title %}Inicio{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/arbitro/fontello.css' %}">
-</head>
-<body>
-<header>
-    <div class="contenedor">
-        <div id="icono" class="icon-ball">Pasión Deportiva</div>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/usuario/base.css' %}">
+{% endblock %}
 
-            <!-- ✅ Checkbox para controlar el menú (oculto) -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-            <!-- ✅ Etiqueta que actúa como botón de menú -->
-            <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">{{user.username}}</div>
-                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
-            </label>
-
-                <!-- ✅ Menú desplegable -->
-            <div class="dropdown">
-                <a href="#">Ver perfil</a>
-                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
-            </div>
+{%block content%}
+<div class="welcome-panel">
+    <div class="welcome-header">
+        Bienvenido al sistema
     </div>
 
-</header>
-    <div id="espacio">
+    <div class="welcome-body">
+        <!-- Botón Django Admin -->
+        <a href="/admin/" class="welcome-btn welcome-btn-main">
+            Django Admin ↗
+        </a>
 
+        <!-- Botón Perfil -->
+        <a href="{% url 'perfilAdm' %}" class="welcome-btn welcome-btn-secondary">
+            Perfil
+        </a>
+
+        <!-- Botón Cerrar sesión -->
+        <a href="{% url 'logout' %}" class="welcome-btn welcome-btn-secondary">
+            Cerrar sesión
+        </a>
     </div>
+</div>
 
-        
-    <div id="presentacion">
-        
-        <div id="nav_contenido">
-
-            <nav id="nav">
-                <a href="{% url 'inicioAdmin' %}" type="submit" class="seccion ss1">Inicio </a>
-                <section class="seccion" id="titulo">Panel de Administración</section>
-                
-                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-            </nav>
-
-            <div id="container_contenido" style="padding: 13em 5em;">
-                <h1 style="color: #333; letter-spacing: 2px;">BIENVENIDO AL MENÚ DE INICIO</h1>
-                <div class="icon-ball"></div>
-
-
-            </div>
-        </div>
-        <footer id="footer">
-            <p class="pie">Pasion Deportiva 2025</p>
-        </footer>
-    </div> 
-</body>
-</html>
+{% endblock %}

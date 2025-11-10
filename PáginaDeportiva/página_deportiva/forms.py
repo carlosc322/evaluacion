@@ -4,7 +4,71 @@ from django import forms
 #FORMS SE USA PARA RECIVBIR Y VALIDAR DATOS QUE EL USUARIO INGRESA EN UNA PAGINA WEB
 #TAMBIEN PARA GENERAR FORMULARIOS DE FORMA AUTOMATICA
 
+from página_deportiva.models import Jugador, Equipo, Partido
 
+class FormJugador(forms.ModelForm):
+    class Meta:
+        model = Jugador
+        fields = '__all__'
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Nombre...'}),
+            'apellido': forms.TextInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Apellido...'}),
+            'dorsal':forms.NumberInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Dorsal...'}),
+            'nacionalidad': forms.TextInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Nacionalidad...'}),
+            'posicion': forms.TextInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Posición...'}),
+        }
+
+class FormEquipo(forms.ModelForm):
+    class Meta:
+        model = Equipo
+        fields = '__all__'
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Nombre...'}),
+            'uniforme': forms.TextInput(attrs={'class': 'formulario-equipo', 'placeholder': 'Uniforme...'}),
+
+        }
+
+class FormPartido(forms.ModelForm):
+    class Meta:
+        model = Partido
+        fields = '__all__'
+
+        widgets = {
+            'fecha': forms.DateTimeInput(attrs={'class': 'formulario-equipo','placeholder': 'Fecha...'})
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
+    def clean_nombre(self):
+        nombre = self.cleaned_data['nombre']
+        if not nombre.isalpha():
+            raise forms.ValidationError("El nombre solo debe contener letras.")
+        return nombre
+
+"""
 def validadorCadena(valorR):
         if len(valorR)> 45:
             raise forms.ValidationError("El limite de dijitos ingresados es 44")
@@ -17,7 +81,7 @@ def validadorCadena(valorR):
 
 #EQUIPO--------------------------------------------------------------------
 
-class FormEquipo(forms.Form):
+"""class FormEquipo(forms.Form):
     nombre = forms.CharField(   
         required=True,
         error_messages={'required': 'Este campo es obligatorio.'}
@@ -39,7 +103,7 @@ class FormEquipo(forms.Form):
         if uniforme.isdigit():
             raise forms.ValidationError("Ingrese un valor valido como cadenas de texto")
         return uniforme
-
+"""
 #ESTADIO--------------------------------------------------------
 
 class FormEstadio(forms.Form):
@@ -69,8 +133,8 @@ class FormEstadio(forms.Form):
 
 from django import forms
 
-class FormJugador(forms.Form):
-    nombre = forms.CharField(
+
+"""    nombre = forms.CharField(
         required=True,
         error_messages={'required': 'Este campo es obligatorio.'}
         )
@@ -89,8 +153,8 @@ class FormJugador(forms.Form):
     posicion = forms.CharField(
         required=True,
         error_messages={'required': 'Este campo es obligatorio.'}
-        )
-
+        )"""
+"""
     # Validadores personalizados
     def clean_nombre(self):
         nombre = self.cleaned_data['nombre']
@@ -117,10 +181,10 @@ class FormJugador(forms.Form):
         posicion = self.cleaned_data['posicion']
         posicion =  validadorCadena(posicion)
         return posicion
-
+"""
 
 #PARTIDO----------------------------------------------------------------------------
-class FormPartido(forms.Form):
+"""class FormPartido(forms.Form):
     fecha = forms.DateTimeField(
         required=True,
         error_messages={'required':'Este campo es obligatorio.'}
@@ -128,7 +192,7 @@ class FormPartido(forms.Form):
 
     def clean_fecha(self):
         fecha = self.cleaned_data['fecha'] 
-        return fecha
+        return fecha"""
 
 #ARBITRO-------------------------------------------------------------------------------
 class FormArbitro(forms.Form):

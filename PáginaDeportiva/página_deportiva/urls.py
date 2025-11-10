@@ -2,6 +2,8 @@ from django.urls import path
 
 from página_deportiva.views import ingresarEstadio, verEstadio,eliminarEstadio,actualizarEstadio,ingresarPartido, verPartido, eliminarPartido, actualizarPartido
 from página_deportiva.views import ingresarJugador, verJugador,eliminarJugador,actualizarJugador, ingresarEquipo, verEquipo,eliminarEquipo,actualizarEquipo, ingresarArbitro,verArbitro,eliminarArbitro, actualizarArbitro
+from página_deportiva.views import loginn
+
 urlpatterns = [
 
 #ESTADIO-------------------------------------------------------
@@ -29,8 +31,9 @@ urlpatterns = [
     path('ingresarArbitro/',ingresarArbitro, name='ingresarAr'),
     path('vistaArbitro/',verArbitro, name='vistaAr'),
     path('eliminarArbitro/<int:id>/',eliminarArbitro,name='eliminarArbitro'),
-    path('actualizarArbitro/<int:id>/',actualizarArbitro,name='actualizarArbitro')
+    path('actualizarArbitro/<int:id>/',actualizarArbitro,name='actualizarArbitro'),
 #MENU--------------------------------------------------------------
 
+    path('',loginn, name= 'logout')
 
 ]

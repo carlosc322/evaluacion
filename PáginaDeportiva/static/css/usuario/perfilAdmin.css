@@ -41,3 +41,78 @@ h1{
 header .contenedor{
     display: table;
 }
+
+/* Panel completo */
+.welcome-panel {
+    background-color: #363636;     /* barra superior oscura */
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+    margin: 0 auto;               /* centrado horizontal */
+    max-width: 600px;
+}
+
+/* Texto "Bienvenido al sistema" */
+.welcome-header {
+    padding: 18px 24px;
+    font-size: 26px;
+    text-align: left;
+}
+
+/* Cuadro interno donde van los botones */
+.welcome-body {
+    background-color: #515056;    /* cuadro gris oscuro del centro */
+    margin: 0 20px 24px;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Estilo base de los tres botones */
+.welcome-btn {
+    display: inline-block;
+    min-width: 320px;
+    max-width: 320px;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    box-shadow: 0 12px 16px rgba(0,0,0,0.6);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+/* Django Admin: verde en el centro y lados oscuros */
+.welcome-btn-main {
+    color: #ffffff;
+    background: linear-gradient(
+        90deg,
+        #515056 0%,
+        #11C58F 22%,
+        #11C58F 78%,
+        #515056 100%
+    );
+}
+
+/* Perfil / Cerrar sesión: degradado gris-blanco como en tu Figma */
+.welcome-btn-secondary {
+    color: #000000;
+    background: linear-gradient(
+        90deg,
+        #515056 0%,
+        #6B6A6F 39%,
+        #FFFFFF 100%
+    );
+}
+
+/* Efectos hover/click */
+.welcome-btn:hover {
+    filter: brightness(1.05);
+}
+
+.welcome-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 7px 10px rgba(0,0,0,0.7);
+}

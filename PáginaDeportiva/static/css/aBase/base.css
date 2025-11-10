@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@100..800&family=Anta&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-@import url('agContenido.css');
-@import url('agNav_contenido.css');
-@import url('agFooter.css');
+@import url('vContenido.css');
+@import url('vNav_contenido.css');
+@import url('vFooter.css');
 
 
 body{
@@ -118,3 +118,26 @@ header .userName{
     display: block;
 }
 
+
+
+/* El documento ocupa toda la altura de la ventana */
+html, body {
+    height: 100%;
+}
+
+/* Contenedor principal debajo del header */
+#presentacion{
+    /* Altura mínima: todo el alto de la ventana menos el header fijo (85px aprox) */
+    min-height: calc(100vh - 85px);
+    display: flex;
+    flex-direction: column;  /* para que el footer quede al final */
+}
+
+#container_contenido{/*TODO ESTO ES EL ESPACIO ENTRE LAS DOS CAJAS MENU Y contenido*/
+    margin: auto;
+    padding: 10px;
+    
+    background-color: rgb(237, 237, 227);
+    width: 60%;
+    text-align: center;
+}

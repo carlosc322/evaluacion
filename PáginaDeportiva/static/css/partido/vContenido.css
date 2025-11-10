@@ -1,11 +1,4 @@
 /* Contenedor principal */
-#container_contenido {
-    margin: auto;
-    padding: 10px 15px;
-    background-color: rgb(237, 237, 227);
-    width: 60%;
-    text-align: center;
-}
 
 /*BOTON Y BUSCADOR----->FILTRO*/
 .barra-superior {
@@ -52,9 +45,7 @@
 .grid-tarjetas {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 5px 20px;
-    background-color: rgb(237, 237, 227);
+    gap: 8px; /* Espacio entre cada tarjeta */
 }
 
 /* Tarjeta en fila horizontal */
@@ -71,13 +62,6 @@
     justify-content: space-between;
 }
 
-/* Imágenes de los equipos */
-.imagen-equipo {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
-}
 
 /* Centro de la tarjeta: textos */
 .info-textos {

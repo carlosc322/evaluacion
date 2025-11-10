@@ -1,61 +1,16 @@
-<!DOCTYPE html>
+{% extends 'aBase/base.html' %}
+
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/partido/vIndice.css' %}">
+{% block title %}Ver partidos{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/partido/fontello.css' %}">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partido/vContenido.css' %}">
+{% endblock %}
 
+{%block content%}
 
-</head>
-<body>
-<header>
-    <div class="contenedor">
-        <div id="icono" class="icon-ball">Pasión Deportiva</div>
-
-            <!-- ✅ Checkbox para controlar el menú (oculto) -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-            <!-- ✅ Etiqueta que actúa como botón de menú -->
-            <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">{{user.username}}</div>
-                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
-            </label>
-
-                <!-- ✅ Menú desplegable -->
-            <div class="dropdown">
-                <a href="#">Ver perfil</a>
-                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
-            </div>
-    </div>
-</header>
-    <div id="espacio">
-
-    </div>
-
-        
-    <div id="presentacion">
-        
-        <div id="nav_contenido">
-
-            <nav id="nav">
-                <a class="seccion ss1" type="submit" href="{% url 'inicioAdmin' %}">Inicio</a>
-                <section class="seccion" id="titulo">Panel de Administración</section>
-            
-                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-                <section></section>
-            </nav>
-
-            <div id="container_contenido">
-                <div class="barra-superior">
+<div class="barra-superior">
                     <input type="text" placeholder="Filtrar partido..." class="buscador">
                     <a type="submit" class="btn-anadir" href="{% url 'ingresarPa' %}">Añadir Partido</a>
                 </div>
@@ -65,7 +20,7 @@
                     <div class="tarjeta">
                         
                         <!-- Imagen izquierda -->
-                        <img class="imagen-equipo" src="{% static 'css/partido/img/partido.jpg' %}" alt="Imagen Equipo 1">
+                        <h5 class="imagen-equipo">Equipo a</h5>
                         
                         <!-- Texto centrado -->
                         <div class="info-textos">
@@ -74,7 +29,7 @@
                         </div>
                         
                         <!-- Imagen derecha -->
-                        <img class="imagen-equipo" src="{% static 'css/partido/img/partido.jpg' %}" alt="Imagen Equipo 2">
+                        <h5 class="imagen-equipo">EQUIPO b</h5>
                         
                         <!-- Botones -->
                         <div class="botones-opciones">
@@ -84,11 +39,4 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-        </div>
-                    <footer id="footer">
-                <p class="pie">Pasion Deportiva 2025</p>
-            </footer>
-    </div> 
-</body>
-</html>
+{% endblock %}

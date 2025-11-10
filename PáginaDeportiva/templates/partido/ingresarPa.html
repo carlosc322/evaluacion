@@ -1,77 +1,22 @@
-<!DOCTYPE html>
+
+{% extends 'aBase/base.html' %}
+
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/partido/agIndice.css' %}
-">
+{% block title %}Ingresar partido{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/partido/fontello.css' %}">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partido/agContenido.css' %}">
+{% endblock %}
 
-
-</head>
-<body>
-<header>
-    <div class="contenedor">
-        <div id="icono" class="icon-ball">Pasión Deportiva</div>
-
-            <!-- ✅ Checkbox para controlar el menú (oculto) -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-            <!-- ✅ Etiqueta que actúa como botón de menú -->
-            <label for="menu-toggle" class="profile-trigger">
-                <div class="userName">{{user.username}}</div>
-                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
-            </label>
-
-                <!-- ✅ Menú desplegable -->
-            <div class="dropdown">
-                <a href="#">Ver perfil</a>
-                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
-            </div>
-    </div>
-</header>
-    <div id="espacio">
-
-    </div>
-
-        
-    <div id="presentacion">
-        
-        <div id="nav_contenido">
-
-            <nav id="nav">
-                <a class="seccion ss1" type="submit" href="{% url 'inicioAdmin' %}">Inicio</a>
-                <section class="seccion" id="titulo">Panel de Administración</section>
-                
-                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-                <section></section>
-            </nav>
-
-
-                <!-- Dentro del div con id="container_contenido" -->
-                <div id="container_contenido">
-
+{%block content%}
                     <!-- Botón Volver -->
                     <a href="{% url 'vistaPa' %}" class="btn-volver">⬅ Volver</a>
         
                     <!-- Formulario de Registro de Equipo -->
                     <form class="formulario-equipo" method="POST">
                         {% csrf_token %}
-                        
-                        <label for="fecha">Ingresar fecha del partido:</label>
-                        <input type="datetime-local" id="fecha" name="fecha" placeholder="fecha...">
-                        {% if form.fecha.errors %}
-                            <div class="error">{{ form.fecha.errors }}</div>
-                        {% endif %}
-
+                        {{ form.as_p }}
                         <!-- Botones -->
                         <div class="botones-formulario">
                             <button href="#" class="btn guardar">Guardar</button>
@@ -81,12 +26,4 @@
                         <div id="daatos"><h3>DATOS DEL PARTIDO</h3></div>
                         <!-- Uniforme (color) -->
                     </form>
-                </div>
-
-        </div>
-                    <footer id="footer">
-                <p class="pie">Pasion Deportiva 2025</p>
-            </footer>
-    </div> 
-</body>
-</html>
+{% endblock %}

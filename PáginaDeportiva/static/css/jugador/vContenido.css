@@ -1,12 +1,5 @@
 /* Barra superior */
-#container_contenido{/*TODO ESTO ES EL ESPACIO ENTRE LAS DOS CAJAS MENU Y contenido*/
-    margin: auto;
-    padding: 10px;
-    
-    background-color: rgb(237, 237, 227);
-    width: 60%;
-    text-align: center;
-}
+
 .barra-superior {
     display: flex;
     justify-content: space-between;
@@ -59,8 +52,7 @@
 .tarjeta.encabezado {
     display: grid;
     grid-template-columns:
-        50px   /* Imagen */
-        35px   /* ID */
+        10px   /* ID */
         100px  /* Nombre */
         110px  /* Apellido */
         60px   /* Dorsal */
@@ -82,14 +74,6 @@
     font-weight: bold;
     color: #333;
     padding: 5px 8px;
-}
-
-/* Imagen */
-.col-imagen img {
-    width: 2.8em;
-    height: 2.8em;
-    object-fit: cover;
-    border-radius: 3px;
 }
 
 /* Texto */
