@@ -45,18 +45,20 @@
                 <a href="{% url 'inicioAdmin' %}" type="submit" class="seccion ss1">Inicio </a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
                 
-                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+
+                <section type="submit" class="seccion ss1 ss2" id="asignarEP"><a href="{% url 'asignarEP' %}">equipo x partido 1 <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJE"><a href="{% url 'asignarJE' %}">jugadores x equipo <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJP"><a href="{% url 'asignarJP' %}">jugadores x partido <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss3" id=""><a href="{% url 'inicioAdmin' %}" style="color: aliceblue;">Publicar<i class="icon-right-open icon-open"></i></a></section>
+                
             </nav>
 
-            <div id="container_contenido" style="padding: 13em 5em;">
-                <h1 style="color: #333; letter-spacing: 2px;">BIENVENIDO AL MENÚ DE INICIO</h1>
-                <div class="icon-ball"></div>
-
-
+            <div id="container_contenido2">
+                <h1 class="titulo-inicio">BIENVENIDO AL MENÚ DE INICIO</h1>
+                <div class="icon-ball" style="color: cadetblue; margin-top: 20px; font-size: 50px;;"></div>
             </div>
         </div>
         <footer id="footer">

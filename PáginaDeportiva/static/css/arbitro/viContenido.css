@@ -1,11 +1,16 @@
 /* Barra superior */
-#container_contenido{/*TODO ESTO ES EL ESPACIO ENTRE LAS DOS CAJAS MENU Y contenido*/
-    margin: auto;
-    padding: 10px 15px;
-    
+#container_contenido {
+    margin: 0 auto;
+    padding: 15px;
     background-color: rgb(237, 237, 227);
-    width: 60%;
+    width: 100px;
     text-align: center;
+
+    /*CLAVE */
+    margin-top: 30px;        /* baja el panel */
+    flex: 1;                 /* 🔥 EMPUJA EL FOOTER */
+    display: flex;
+    flex-direction: column;
 }
 .barra-superior {
     display: flex;

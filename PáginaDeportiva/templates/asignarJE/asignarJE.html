@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/asignarJE/agIndice.css' %}
+">
+
+    <link rel="stylesheet" href="{% static 'css/asignarJE/fontello.css' %}">
+
+
+</head>
+<body>
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
+
+            <!--  Checkbox para controlar el menú (oculto) -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <!--  Etiqueta que actúa como botón de menú -->
+            <label for="menu-toggle" class="profile-trigger">
+                <div class="userName">{{user.username}}</div>
+                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+            </label>
+
+                <!--  Menú desplegable -->
+            <div class="dropdown">
+                <a href="#">Ver perfil</a>
+                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
+            </div>
+    </div>
+</header>
+    <div id="espacio">
+
+    </div>
+
+        
+    <div id="presentacion">
+        
+        <div id="nav_contenido">
+
+            <nav id="nav">
+                <a type="submit" class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
+                <section class="seccion" id="titulo">Panel de Administración</section>
+            
+                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+
+                <section type="submit" class="seccion ss1 ss2" id="asignarEP"><a href="{% url 'asignarEP' %}">equipo x partido 1 <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJE"><a href="{% url 'asignarJE' %}">jugadores x equipo <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJP"><a href="{% url 'asignarJP' %}">jugadores x partido <i class="icon-right-open icon-open"></i></a></section>
+                
+            </nav>
+
+
+                <!-- Dentro del div con id="container_contenido" -->
+                <div id="container_contenido">
+
+                    <div class="tituloE">
+                        <h2>ASIGNAR JUGADOR A UN EQUIPO</h2>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                    <div class="formulario-equipo">
+
+                        <!-- BUSCAR EQUIPO -->
+                        <label>Buscar equipo:</label>
+                        <div class="buscador">
+                            <input type="text" id="buscar_equipo" placeholder="Buscar equipo...">
+                            <button type="button" onclick="buscarEquipos()">Buscar
+                                <i class="icon-search"></i>
+                            </button>
+                        </div>
+
+                        <!-- RESULTADOS EQUIPOS (SCROLL) -->
+                        <div class="caja-scroll" id="scroll-equipos">
+                            <input type="text" value="Resultados aparecerán aquí" readonly>
+                        </div>
+
+                        <!-- EQUIPO SELECCIONADO -->
+                        <label>Equipo (ingresa el ID)</label>
+                        <input type="hidden" name="equipo" id="equipo_id">
+                        <input type="number" name="equipo"  id="equipo_nombre" style="margin-bottom: 10px; padding: 8px 5px; width: 200px; border: none; border-radius: 3px;" placeholder="Equipo...">
+
+                        <!-- FILA BOTÓN + BUSCADOR JUGADOR -->
+                        <div id="partido-busqueda">
+
+                            <button type="button"
+                                    class="btn borrador"
+                                    onclick="cargarUltimosJugadores()">
+                                cargar últimos jugadores
+                            </button>
+
+                            <div class="buscador">
+                                <input type="text"
+                                    id="buscar_jugador"
+                                    style="height: 38px;"
+                                    placeholder="Buscar jugador...">
+
+                                <button type="button" onclick="buscarJugadores()">
+                                    Buscar <i class="icon-search"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- RESULTADOS JUGADORES (SCROLL) -->
+                        <div class="caja-scroll" id="scroll-jugadores">
+                            <input type="text" value="Resultados aparecerán aquí" readonly>
+                        </div>
+
+                        <!-- JUGADOR SELECCIONADO -->
+                        <label>Jugador (Ingrese el ID)</label>
+                        <input type="hidden" name="jugador" id="jugador_id">
+                        <input type="number" name="jugador" id="jugador_nombre" style="margin-bottom: 10px; padding: 8px 5px; width: 200px; border: none;" placeholder="Jugador...">
+
+                        <!-- BOTONES -->
+                        <div style="margin-top:15px; text-align:center;">
+                            <button type="submit" class="btn guardar">Guardar</button>
+                            <button type="submit" class="btn cancelar">Cancelar</button>
+                        </div>
+
+                    </div>
+                    </form>
+                    <button style="margin-top: 16px; padding: 10px 20px; ">
+                        <a href="{% url 'vistaJu' %}" style=" color: black;"> verificar cambio  </style></a>
+                    </button>
+                    
+                </div>
+        </div>
+                    <footer id="footer">
+                <p class="pie">Pasion Deportiva 2025</p>
+            </footer>
+    </div> 
+
+    <script>
+const URL_BUSCAR_JUGADORES = "{% url 'buscar_jugadores' %}";
+
+function buscarJugadores() {
+    const q = document.getElementById("buscar_jugador").value;
+
+    fetch(`${URL_BUSCAR_JUGADORES}?q=${q}`)
+        .then(r => r.json())
+        .then(data => llenarScrollJugadores(data));
+}
+
+function cargarUltimosJugadores() {
+    fetch(URL_BUSCAR_JUGADORES)
+        .then(r => r.json())
+        .then(data => llenarScrollJugadores(data));
+}
+
+function llenarScrollJugadores(jugadores) {
+    const scroll = document.getElementById("scroll-jugadores");
+    scroll.innerHTML = "";
+
+    if (jugadores.length === 0) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = "No hay resultados";
+        input.readOnly = true;
+        scroll.appendChild(input);
+        return;
+    }
+
+    jugadores.forEach(j => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.readOnly = true;
+        input.value = `${j.id} | ${j.nombre}`;
+
+        // 👉 Al hacer click, se selecciona
+        input.onclick = () => {
+            document.getElementById("jugador_id").value = j.id;
+            document.getElementById("jugador_nombre").value = j.nombre;
+        };
+
+        scroll.appendChild(input);
+    });
+}
+</script>
+
+<script>
+const URL_BUSCAR_EQUIPOS = "{% url 'buscar_equipos' %}";
+
+function buscarEquipos() {
+    const texto = document.getElementById("buscar_equipo").value;
+
+    fetch(`${URL_BUSCAR_EQUIPOS}?q=${texto}`)
+        .then(r => r.json())
+        .then(data => llenarScrollEquipos(data));
+}
+
+function llenarScrollEquipos(equipos) {
+    const scroll = document.getElementById("scroll-equipos");
+    scroll.innerHTML = "";
+
+    if (equipos.length === 0) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = "No hay resultados";
+        input.readOnly = true;
+        scroll.appendChild(input);
+        return;
+    }
+
+    equipos.forEach(e => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.readOnly = true;
+        input.value = `${e.id} | ${e.nombre}`;
+        scroll.appendChild(input);
+    });
+}
+</script>
+
+
+</body>
+</html>

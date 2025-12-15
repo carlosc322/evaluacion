@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/asignarJP/agIndice.css' %}
+">
+
+    <link rel="stylesheet" href="{% static 'css/asignarJP/fontello.css' %}">
+
+
+</head>
+<body>
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
+
+            <!--  Checkbox para controlar el menú (oculto) -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <!--  Etiqueta que actúa como botón de menú -->
+            <label for="menu-toggle" class="profile-trigger">
+                <div class="userName">{{user.username}}</div>
+                <img src="{% static 'css/usuario/img/usuario.jpg' %}" alt="imagen del usuario" width="40px" height="40px">
+            </label>
+
+                <!--  Menú desplegable -->
+            <div class="dropdown">
+                <a href="#">Ver perfil</a>
+                <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
+            </div>
+    </div>
+</header>
+    <div id="espacio">
+
+    </div>
+
+        
+    <div id="presentacion">
+        
+        <div id="nav_contenido">
+
+            <nav id="nav">
+                <a type="submit" class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
+                <section class="seccion" id="titulo">Panel de Administración</section>
+            
+                <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+
+                <section type="submit" class="seccion ss1 ss2" id="asignarEP"><a href="{% url 'asignarEP' %}">equipo x partido 1 <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJE"><a href="{% url 'asignarJE' %}">jugadores x equipo <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJP"><a href="{% url 'asignarJP' %}">jugadores x partido <i class="icon-right-open icon-open"></i></a></section>
+                
+            </nav>
+
+
+                <!-- Dentro del div con id="container_contenido" -->
+                <div id="container_contenido">
+
+    <div class="tituloE">
+        <h2>ASIGNAR JUGADORES A UN PARTIDO</h2>
+    </div>
+
+    <div class="formulario-equipo">
+
+        <!-- FILA SUPERIOR: botón + buscador de partidos -->
+        <div id="partido-busqueda">
+
+            <!-- Botón cargar últimos partidos -->
+            <button type="button" class="btn borrador">
+                cargar últimos partidos
+            </button>
+
+            <!-- Buscador de partidos con lupa -->
+            <div class="buscador",style="height: 50;">
+                <input 
+                    type="text"
+                    id="buscar_partido"
+                    style="height: 38px;"
+                    placeholder="Buscar partido..."
+                >
+                <button type="button"> buscar
+                    <i class="icon-search"></i>
+                </button>
+            </div>
+        </div>
+
+                    <!-- RESULTADOS PARTIDOS (SCROLL) -->
+                    <div class="caja-scroll">
+                        <input type="text" value="1 | 12/21/2025" readonly>
+                        <input type="text" value="2 | 12/18/2025" readonly>
+                        <input type="text" value="3 | 12/15/2025" readonly>
+                        <input type="text" value="4 | 12/10/2025" readonly>
+                        <input type="text" value="5 | 12/05/2025" readonly>
+                    </div>
+
+                    <!-- FECHA PARTIDO -->
+                    <label for="fecha_partido">Fecha del partido:</label>
+                    <input type="date" id="fecha_partido"  name="fecha_partido" style="margin-bottom: 10px;">
+
+                    <div id="partido-busqueda">
+
+                            <button type="button" class="btn borrador">
+                                cargar últimos jugadores
+                            </button>
+
+                            <div class="buscador">
+                                <input type="text" style="height: 38px;" placeholder="Buscar jugador...">
+                                <button type="button">Buscar
+                                    <i class="icon-search"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- RESULTADOS JUGADORES (SCROLL) -->
+                        <div class="caja-scroll">
+                            <input type="text" value="1 | Carlos Canchari" readonly>
+                            <input type="text" value="2 | Juan Pérez" readonly>
+                            <input type="text" value="3 | Pedro Soto" readonly>
+                        </div>
+
+                        <!-- JUGADOR SELECCIONADO -->
+                        <label>Nombre del jugador:</label>
+                        <input type="text" placeholder="Jugador..." readonly>
+
+                        <!-- BOTONES -->
+                        <div style="margin-top:15px; text-align:center;">
+                            <button class="btn guardar">Guardar</button>
+                            <button class="btn cancelar">Cancelar</button>
+                        </div>
+
+
+    </div>
+</div>
+
+
+        </div>
+                    <footer id="footer">
+                <p class="pie">Pasion Deportiva 2025</p>
+            </footer>
+    </div> 
+</body>
+</html>

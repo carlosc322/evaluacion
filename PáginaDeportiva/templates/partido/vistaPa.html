@@ -46,12 +46,14 @@
                 <a class="seccion ss1" type="submit" href="{% url 'inicioAdmin' %}">Inicio</a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
             
-                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="estadio"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-                <section></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+
+                <section type="submit" class="seccion ss1 ss2" id="asignarEP"><a href="{% url 'asignarEP' %}">equipo x partido 1 <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJE"><a href="{% url 'asignarJE' %}">jugadores x equipo <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJP"><a href="{% url 'asignarJP' %}">jugadores x partido <i class="icon-right-open icon-open"></i></a></section>
+                
             </nav>
 
             <div id="container_contenido">
@@ -62,27 +64,45 @@
 
                 <div class="grid-tarjetas">
                     {% for partido in partidos %}
-                    <div class="tarjeta">
-                        
-                        <!-- Imagen izquierda -->
-                        <img class="imagen-equipo" src="{% static 'css/partido/img/partido.jpg' %}" alt="Imagen Equipo 1">
-                        
-                        <!-- Texto centrado -->
-                        <div class="info-textos">
-                            <span class="titulo">FECHA</span>
-                            <span class="subtitulo">{{ partido.fecha }}</span>
-                        </div>
-                        
-                        <!-- Imagen derecha -->
-                        <img class="imagen-equipo" src="{% static 'css/partido/img/partido.jpg' %}" alt="Imagen Equipo 2">
-                        
-                        <!-- Botones -->
-                        <div class="botones-opciones">
-                            <a href="{% url 'actualizarPartido' partido.id %}" class="btn-opcion">Actualizar</a>
-                            <a href="{% url 'eliminarPartido' partido.id %}" class="btn-opcion eliminar">Eliminar</a>
-                        </div>
-                    </div>
-                    {% endfor %}
+<div class="tarjeta">
+
+    <!-- Equipo izquierdo -->
+    <div class="info-equipo">
+        {% with equipos=partido.equipopartido_set.all %}
+            {% if equipos|length > 0 %}
+                {{ equipos.0.equipo.nombre }}
+            {% else %}
+                Sin equipo
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Texto centrado -->
+    <div class="info-textos">
+        <span class="titulo">FECHA</span>
+        <span class="subtitulo">{{ partido.fecha }}</span>
+    </div>
+
+    <!-- Equipo derecho -->
+    <div class="info-equipo">
+        {% with equipos=partido.equipopartido_set.all %}
+            {% if equipos|length > 1 %}
+                {{ equipos.1.equipo.nombre }}
+            {% else %}
+                Sin equipo
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Botones -->
+    <div class="botones-opciones">
+        <a href="{% url 'actualizarPartido' partido.id %}" class="btn-opcion">Actualizar</a>
+        <a href="{% url 'eliminarPartido' partido.id %}" class="btn-opcion eliminar">Eliminar</a>
+    </div>
+
+</div>
+{% endfor %}
+
                 </div>
             </div>
         </div>

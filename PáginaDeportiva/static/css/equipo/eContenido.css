@@ -1,12 +1,14 @@
 /* Barra superior */
-#container_contenido{/*TODO ESTO ES EL ESPACIO ENTRE LAS DOS CAJAS MENU Y contenido*/
+#container_contenido {
     margin: auto;
     padding: 10px 15px;
-    
     background-color: rgb(237, 237, 227);
-    width: 60%;
+    width: 50%;
     text-align: center;
+    margin-top: 30px;
 }
+
+
 .barra-superior {
     display: flex;
     justify-content: space-between;
@@ -59,13 +61,14 @@
 .tarjeta.encabezado {
     display: grid;
     grid-template-columns:
-        50px   /* Imagen */
-        40px   /* ID */
-        250px  /* Nombre */
-        120px  /* Apellido */
-        auto;  /* Botones */
+        40px    /* Imagen */
+        35px    /* ID */
+        140px   /* Nombre */
+        100px   /* Uniforme */
+        140px   /* Estadio */
+        150px;  /* Botones */
     align-items: center;
-    padding: 6px 8px;
+    padding: 6px 6px;
     padding-bottom: 1px;
 }
 
@@ -80,6 +83,7 @@
     font-weight: bold;
     color: #333;
     padding: 5px 8px;
+    font-size: 12px;
 }
 
 /* Imagen de cada árbitro */
@@ -91,29 +95,22 @@
 }
 
 /* Columnas de texto */
-.col-texto {
-    font-size: 14px;
-    color: #333;
-    padding: 3px;
+
+.col-texto,
+.col-numero {
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-/* Columnas numéricas (ID, Edad) */
-.col-numero {
-    font-size: 14px;
-    color: #333;
-    text-align: center;
-    padding: 3px;
-    white-space: nowrap;
-}
-
 /* Columna de botones */
 .col-botones {
-    margin-left: auto;
+    margin-left: 70px;
     display: flex;
-    gap: 8px;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 /* Estilo base de los botones */

@@ -3,9 +3,14 @@
 @import url('eNav_contenido.css');
 @import url('eFooter.css');
 
-
+html, body {
+    height: 100%;
+    margin: 0;
+}
 body{
     font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 *{
     padding: 0;

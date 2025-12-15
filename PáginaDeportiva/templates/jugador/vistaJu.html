@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load extras %}
 
 <html lang="en">
 <head>
@@ -46,12 +47,14 @@
                 <a type="submit" class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
                 <section class="seccion" id="titulo">Panel de Administración</section>
             
-                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="arbitro"><a href="{% url 'vistaAr' %}">Arbitros <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="torneo"><a href="{% url 'vistaEs' %}">Estadios <i class="icon-right-open icon-open"></i></a></section>
-                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
                 <section type="submit" class="seccion ss1" id="jugador"><a href="{% url 'vistaJu' %}">Jugadores <i class="icon-right-open icon-open"></i></a></section>
-                <section></section>
+                <section type="submit" class="seccion ss1" id="equipo"><a href="{% url 'vistaEq' %}">Equipos <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1" id="partido"><a href="{% url 'vistaPa' %}">Partidos <i class="icon-right-open icon-open"></i></a></section>
+
+                <section type="submit" class="seccion ss1 ss2" id="asignarEP"><a href="{% url 'asignarEP' %}">equipo x partido 1 <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJE"><a href="{% url 'asignarJE' %}">jugadores x equipo <i class="icon-right-open icon-open"></i></a></section>
+                <section type="submit" class="seccion ss1 ss2" id="asignarJP"><a href="{% url 'asignarJP' %}">jugadores x partido <i class="icon-right-open icon-open"></i></a></section>
+                
             </nav>
 
             <div id="container_contenido">
@@ -60,39 +63,49 @@
                     <a type="submit" class="btn-anadir" href="{% url 'ingresarJu' %}">Añadir Jugador</a>
                 </div>
 
-                <!-- Contenedor de tarjetas -->
-<div class="grid-tarjetas">
-    <!-- Cabecera -->
-    <div class="tarjeta encabezado">
-        <div class="col-imagen"></div>
-        <div class="col-numero">ID</div>
-        <div class="col-texto">Nombre</div>
-        <div class="col-texto">Apellido</div>
-        <div class="col-numero">Dorsal</div>
-        <div class="col-texto">Nacionalidad</div>
-        <div class="col-texto">Posición</div>
-        <div class="col-botones"></div>
-    </div>
+                                    <!-- Contenedor de tarjetas -->
+                    <div class="grid-tarjetas">
+                        <!-- Cabecera -->
+                        <div class="tarjeta encabezado">
+                        <div class="col-imagen"></div>
+                        <div class="col-numero">ID</div>
+                        <div class="col-texto">Nombre</div>
+                        <div class="col-texto">Apellido</div>
+                        <div class="col-numero">Dorsal</div>
+                        <div class="col-texto">Nacionalidad</div>
+                        <div class="col-texto">Posición</div>
+                        <div class="col-texto">Equipo</div>
+                        <div class="col-botones"></div>
+                    </div>
 
-    <!-- Tarjetas dinámicas -->
-    {% for jugador in jugadores %}
-    <div class="tarjeta">
-        <div class="col-imagen">
-            <img src="{% static 'css/jugador/img/jugador.jpg' %}" alt="Imagen">
-        </div>
-        <div class="col-numero">{{ jugador.id }}</div>
-        <div class="col-texto">{{ jugador.nombre }}</div>
-        <div class="col-texto">{{ jugador.apellido }}</div>
-        <div class="col-numero">{{ jugador.dorsal }}</div>
-        <div class="col-texto">{{ jugador.nacionalidad }}</div>
-        <div class="col-texto">{{ jugador.posicion }}</div>
-        <div class="col-botones">
-            <a href="{% url 'actualizarJugador' jugador.id %}" class="btn-opcion">Actualizar</a>
-            <a href="{% url 'eliminarJugador' jugador.id %}" class="btn-opcion eliminar">Eliminar</a>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+                        <!-- Tarjetas dinámicas -->
+                        {% for jugador in jugadores %}
+                        <div class="tarjeta">
+                            <div class="col-imagen">
+                                <img src="{% static 'css/jugador/img/jugador.jpg' %}" alt="Imagen">
+                            </div>
+                            <div class="col-numero">{{ jugador.id }}</div>
+                            <div class="col-texto">{{ jugador.nombre }}</div>
+                            <div class="col-texto">{{ jugador.apellido }}</div>
+                            <div class="col-numero">{{ jugador.dorsal }}</div>
+                            <div class="col-texto">{{ jugador.nacionalidad }}</div>
+                            <div class="col-texto">{{ jugador.posicion }}</div>
+                            <div class="col-texto">
+                                {% with relaciones|get_item:jugador.id as equipo %}
+                                    {% if equipo %}
+                                        {{ equipo.nombre }}
+                                    {% else %}
+                                        Sin asignar
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="col-botones">
+                                <a href="{% url 'actualizarJugador' jugador.id %}"  class="btn-opcion"  >Actualizar</a>
+                                <a href="{% url 'eliminarJugador' jugador.id %}" class="btn-opcion eliminar"  >Eliminar</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
 
             </div>
         </div>

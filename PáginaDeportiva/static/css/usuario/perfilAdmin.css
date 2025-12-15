@@ -5,8 +5,15 @@
 @import url('fontello.css');
 
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body{
     font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 *{
     padding: 0;

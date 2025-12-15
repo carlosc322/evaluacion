@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/asignarEP/agIndice.css' %}">
+    <link rel="stylesheet" href="{% static 'css/asignarEP/fontello.css' %}">
+</head>
+
+<body>
+
+<header>
+    <div class="contenedor">
+        <div id="icono" class="icon-ball">Pasión Deportiva</div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+        <label for="menu-toggle" class="profile-trigger">
+            <div class="userName">{{user.username}}</div>
+            <img src="{% static 'css/usuario/img/usuario.jpg' %}" width="40" height="40">
+        </label>
+
+        <div class="dropdown">
+            <a href="#">Ver perfil</a>
+            <a href="{% url 'perfilAdm' %}">Cerrar sesión</a>
+        </div>
+    </div>
+</header>
+
+<div id="espacio"></div>
+
+<div id="presentacion">
+<div id="nav_contenido">
+
+<nav id="nav">
+    <a class="seccion ss1" href="{% url 'inicioAdmin' %}">Inicio</a>
+    <section class="seccion" id="titulo">Panel de Administración</section>
+
+    <section class="seccion ss1"><a href="{% url 'vistaJu' %}">Jugadores</a></section>
+    <section class="seccion ss1"><a href="{% url 'vistaEq' %}">Equipos</a></section>
+    <section class="seccion ss1"><a href="{% url 'vistaPa' %}">Partidos</a></section>
+
+    <section class="seccion ss1 ss2"><a href="{% url 'asignarEP' %}">equipo x partido</a></section>
+    <section class="seccion ss1 ss2"><a href="{% url 'asignarJE' %}">jugadores x equipo</a></section>
+    <section class="seccion ss1 ss2"><a href="{% url 'asignarJP' %}">jugadores x partido</a></section>
+</nav>
+
+<!-- CONTENIDO -->
+<div id="container_contenido">
+
+<div class="tituloE">
+    <h2>ASIGNAR EQUIPOS A UN PARTIDO</h2>
+</div>
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="formulario-equipo">
+
+<!-- BUSCADOR PARTIDOS -->
+<div id="partido-busqueda">
+
+    <button type="button"
+            class="btn borrador"
+            onclick="cargarUltimosPartidos()">
+        cargar últimos partidos
+    </button>
+
+    <div class="buscador" style="height:50px;">
+        <input type="date" id="buscar_partido" style="height:38px;">
+        <button type="button" onclick="buscarPartidos()">
+            buscar <i class="icon-search"></i>
+        </button>
+    </div>
+</div>
+
+<!-- SCROLL PARTIDOS -->
+<div class="caja-scroll" id="scroll-partidos">
+    <input type="text" value="Resultados aparecerán aquí" readonly>
+</div>
+
+
+<!-- PARTIDO FINAL -->
+<label>Partido (ingresa el ID):</label>
+<input
+    type="number"
+    name="partido"
+    id="partido_id"
+    placeholder="ID del partido"
+    style="margin-bottom: 10px; padding: 8px 5px; width: 200px; border: none; border-radius: 3px;"
+    required
+>
+
+
+
+<!-- BUSCADOR EQUIPOS (luego lo hacemos dinámico) -->
+<label>Buscar equipo:</label>
+<div class="buscador" style="margin-bottom:17px;">
+    <input
+        type="text"
+        id="buscar_equipo"
+        placeholder="Buscar equipo..."
+        style="height:38px;"
+    >
+    <button type="button" onclick="buscarEquipos()">buscar</button>
+</div>
+
+<!-- SCROLL EQUIPOS (visual por ahora) -->
+<div class="caja-scroll" id="scroll-equipos">
+    <input type="text" value="Resultados aparecerán aquí" readonly>
+</div>
+
+<label>Asignar equipo A (ingrese el ID):</label>
+<input 
+    type="number" 
+    name="equipo_a" 
+    placeholder="Ingrese equipo" 
+    style="margin-bottom: 10px; padding: 8px 5px; width: 200px; border: none; border-radius: 3px;">
+
+<label>Asignar equipo B (ingrese el ID):</label>
+<input 
+    type="number" 
+    name="equipo_b" 
+    placeholder="Ingrese equipo" 
+    style="margin-bottom: 10px; padding: 8px 5px; width: 200px; border: none; border-radius: 3px;">
+
+<div style="margin-top:15px; text-align:center;">
+    <button type="submit" class="btn guardar">Guardar</button>
+    <button type="reset" class="btn cancelar">Cancelar</button>
+</div>
+
+</div>
+</form>
+<button style="margin-top: 16px; padding: 10px 20px; ">
+    <a href="{% url 'vistaPa' %}" style=" color: black;"> verificar cambio  </style></a>
+</button>
+
+</div>
+</div>
+
+<footer id="footer">
+    <p class="pie">Pasion Deportiva 2025</p>
+</footer>
+
+</div>
+
+<!-- ================== JAVASCRIPT ================== -->
+<script>
+const URL_BUSCAR_PARTIDOS = "{% url 'buscar_partidos' %}";
+
+function buscarPartidos() {
+    const fecha = document.getElementById("buscar_partido").value;
+
+    fetch(`${URL_BUSCAR_PARTIDOS}?fecha=${fecha}`)
+        .then(response => response.json())
+        .then(data => llenarScrollPartidos(data));
+}
+
+function cargarUltimosPartidos() {
+    fetch(URL_BUSCAR_PARTIDOS)
+        .then(response => response.json())
+        .then(data => llenarScrollPartidos(data));
+}
+
+function llenarScrollPartidos(partidos) {
+    const scroll = document.getElementById("scroll-partidos");
+
+    // Limpia SOLO el contenido (no el scroll)
+    scroll.innerHTML = "";
+
+    if (partidos.length === 0) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = "No hay resultados";
+        input.readOnly = true;
+        scroll.appendChild(input);
+        return;
+    }
+
+    partidos.forEach(p => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.readOnly = true;
+        input.value = `${p.id} | ${p.fecha}`;
+        scroll.appendChild(input);
+    });
+}
+</script>
+
+<script>
+const URL_BUSCAR_EQUIPOS = "{% url 'buscar_equipos' %}";
+
+function buscarEquipos() {
+    const texto = document.getElementById("buscar_equipo").value;
+
+    fetch(`${URL_BUSCAR_EQUIPOS}?q=${texto}`)
+        .then(r => r.json())
+        .then(data => llenarScrollEquipos(data));
+}
+
+function llenarScrollEquipos(equipos) {
+    const scroll = document.getElementById("scroll-equipos");
+    scroll.innerHTML = "";
+
+    if (equipos.length === 0) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = "No hay resultados";
+        input.readOnly = true;
+        scroll.appendChild(input);
+        return;
+    }
+
+    equipos.forEach(e => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.readOnly = true;
+        input.value = `${e.id} | ${e.nombre}`;
+        scroll.appendChild(input);
+    });
+}
+</script>
+
+
+
+</body>
+</html>

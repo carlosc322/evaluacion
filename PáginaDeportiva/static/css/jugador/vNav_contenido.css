@@ -1,11 +1,16 @@
-#nav_contenido{
+#presentacion {
+    min-height: calc(100vh - 85px); /* 85px = alto del header */
+    display: flex;
+    flex-direction: column;
+}
 
-    width: 85%;
+#nav_contenido {
+    flex: 1;                 /* 🔥 empuja el footer */
+    width: 75%;
     margin: auto;
     display: flex;
     gap: 7%;
-    align-items: flex-start; /* Alinea los hijos al inicio en vertical */
-
+    align-items: flex-start;
 }
 
 #nav {
@@ -16,6 +21,7 @@
     text-align: center;
     color: cornflowerblue;
     align-self: flex-start;
+    margin-top: 30px;
     
     
 
@@ -41,7 +47,17 @@
     text-overflow: ellipsis;   /* Agrega "..." si el texto es muy largo */
     border-bottom: 2px solid #333;
 }
-
+#nav .ss2{
+    background-color: rgb(146, 157, 71);
+    
+}
+#nav .ss2 a{
+    color: aliceblue;
+    
+}
+#nav .ss2:hover {
+    background-color: rgb(137, 137, 62); /* Un poco más claro al pasar el mouse */
+}
 #nav .ss1:hover {
     background-color: beige; /* Un poco más claro al pasar el mouse */
 }

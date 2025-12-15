@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@100..800&family=Anta&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-@import url('vContenido.css');
-@import url('vNav_contenido.css');
-@import url('vFooter.css');
+@import url('agContenido.css');
+@import url('agNav_contenido.css');
+@import url('agFooter.css');
 
-
+html, body {
+    height: 100%;
+    margin: 0;
+}
 body{
     font-family: "Roboto", sans-serif;
 }
@@ -117,3 +120,4 @@ header .userName{
 .menu-toggle:checked + .profile-trigger + .dropdown {
     display: block;
 }
+

@@ -1,61 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from .models import Equipo, Partido, EquipoPartido
+from django.db import IntegrityError
+from django.db.models import Prefetch
+from django.db import IntegrityError
+from .models import Equipo, Jugador, JugadorEquipo
 # Create your views here.
 #En views.py SE AGREGAN LOS DATOS A LA db
 #
 
 
 #ESTADIO
-from página_deportiva.forms import FormEstadio
-from página_deportiva.models import Estadio
-
-def ingresarEstadio(request):
-    if request.method == 'POST':
-        form = FormEstadio(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            capacidad = form.cleaned_data['capacidad']
-            nuevo_estadio = Estadio(nombre=nombre, capacidad=capacidad)
-            nuevo_estadio.nombre = nuevo_estadio.nombre.title()
-            nuevo_estadio.save()
-            return redirect('/paginaDeportiva/vistaEstadio/')
-        else:
-            return render(request,'estadio/ingresarEs.html',{'form':form})
-    else:
-        form = FormEstadio()
-    return render(request,'estadio/ingresarEs.html',{'form':form})
-
-
-def verEstadio(request):
-    estadios = Estadio.objects.all()
-    data = {'estadios':estadios}
-    return render(request, 'estadio/vistaEs.html',data)
-
-def eliminarEstadio(request,id):
-    estadio = Estadio.objects.get(id=id)
-    estadio.delete()
-    return redirect('vistaEs')#'vistaEs' viene de url.py --> name='vistaEs'
-
-
-
-def actualizarEstadio(request, id):
-    estadio = get_object_or_404(Estadio, id=id)  
-    if request.method == 'POST':          
-        form = FormEstadio(request.POST)  
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            capacidad = form.cleaned_data['capacidad']
-            estadio.nombre = nombre
-            estadio.capacidad = capacidad
-            estadio.save()                   
-            return redirect('vistaEs')
-    else:
-        form = FormEstadio(initial={
-            'nombre': estadio.nombre,
-            'capacidad': estadio.capacidad
-            })
-    return render(request, 'estadio/actualizarEs.html',{'form':form})
-
 
 #PARTIDO-----------------------------------------------
 
@@ -76,10 +30,21 @@ def ingresarPartido(request):
         form = FormPartido()
     return render(request,'partido/ingresarPa.html',{'form':form})
 
+
+
 def verPartido(request):
-    partidos = Partido.objects.all()
-    data = {'partidos':partidos}
-    return render(request, 'partido/vistaPa.html',data)
+    partidos = Partido.objects.prefetch_related(
+        Prefetch(
+            'equipopartido_set',
+            queryset=EquipoPartido.objects.select_related('equipo')
+        )
+    )
+
+    context = {
+        'partidos': partidos
+    }
+    return render(request, 'partido/vistaPa.html', context)
+
 
 def eliminarPartido(request,id):
     partido = Partido.objects.get(id = id)
@@ -101,9 +66,10 @@ def actualizarPartido(request,id):
         })
     return render(request, 'partido/actualizarPartido.html',{'form':form})
 
-#JUGADOR
+#JUGADOR------------------------------------------------------------------------------------------
 from página_deportiva.forms import FormJugador
 from página_deportiva.models import Jugador
+from datetime import datetime
 
 def ingresarJugador(request):
     if request.method == 'POST':
@@ -125,10 +91,29 @@ def ingresarJugador(request):
         form = FormJugador()
     return render(request, 'jugador/ingresarJu.html',{'form':form})
 
+
+
+
+from .models import Jugador, JugadorEquipo
+
 def verJugador(request):
     jugadores = Jugador.objects.all()
-    data = {'jugadores':jugadores}
-    return render(request,'jugador/vistaJu.html',data)
+
+    # diccionario: jugador_id -> equipo
+    relaciones = {
+        je.jugador_id: je.equipo
+        for je in JugadorEquipo.objects.select_related("equipo")
+    }
+
+    data = {
+        'jugadores': jugadores,
+        'relaciones': relaciones
+    }
+
+    return render(request, 'jugador/vistaJu.html', data)
+
+
+
 
 def eliminarJugador(request,id):
     jugador = Jugador.objects.get(id = id)
@@ -211,7 +196,7 @@ def actualizarEquipo(request,id):
             equipo.nombre = nombre
             equipo.uniforme = uniforme
             equipo.save()
-            return redirect('vistaEq')
+            return redirect('/paginaDeportiva/vistaEquipo/')
     else:
         form = FormEquipo(initial={
             'nombre': equipo.nombre,
@@ -223,64 +208,156 @@ def actualizarEquipo(request,id):
 
 #ARBITRO----------------------------------------------------
 
-from página_deportiva.forms import FormArbitro
-from página_deportiva.models import Arbitro
+#----------------------------------------------------------------
 
-def ingresarArbitro(request):
-    if request.method == 'POST':
-        form = FormArbitro(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            apellido = form.cleaned_data['apellido']
-            edad = form.cleaned_data['edad']
-            nacionalidad = form.cleaned_data['nacionalidad']
+def asignarEP(request):
+    equipos = Equipo.objects.all()
+    partidos = Partido.objects.all()
+    mensaje = None
 
-            nuevo_arbitro = Arbitro(nombre=nombre,apellido=apellido,edad=edad,nacionalidad=nacionalidad)
-            nuevo_arbitro.nombre = nuevo_arbitro.nombre.title()
-            nuevo_arbitro.apellido = nuevo_arbitro.apellido.title()
-            nuevo_arbitro.nacionalidad = nuevo_arbitro.nacionalidad.title()
-            
-            nuevo_arbitro.save()
-            return redirect('/paginaDeportiva/vistaArbitro/')
-        else:
-            return render(request, 'arbitro/ingresarAr.html',{'form':form})
+    if request.method == "POST":
+        partido_id = request.POST.get("partido")
+        equipo_a_id = request.POST.get("equipo_a")
+        equipo_b_id = request.POST.get("equipo_b")
+
+        if partido_id and equipo_a_id and equipo_b_id:
+            try:
+                partido = Partido.objects.get(id=partido_id)
+                equipo_a = Equipo.objects.get(id=equipo_a_id)
+                equipo_b = Equipo.objects.get(id=equipo_b_id)
+
+                # Relación equipo A
+                EquipoPartido.objects.get_or_create(
+                    equipo=equipo_a,
+                    partido=partido
+                )
+
+                # Relación equipo B
+                EquipoPartido.objects.get_or_create(
+                    equipo=equipo_b,
+                    partido=partido
+                )
+
+                return redirect("asignarEP")
+
+            except Partido.DoesNotExist:
+                mensaje = "El partido no existe"
+            except Equipo.DoesNotExist:
+                mensaje = "Uno de los equipos no existe"
+            except IntegrityError:
+                mensaje = "Este partido ya tiene equipos asignados"
+
+    context = {
+        "equipos": equipos,
+        "partidos": partidos,
+        "mensaje": mensaje
+    }
+
+    return render(request, "asignarEP/asignarEP.html", context)
+
+#----------------------------------------------------------------
+
+
+def asignarJE(request):
+    mensaje = None
+
+    if request.method == "POST":
+        equipo_id = request.POST.get("equipo")
+        jugador_id = request.POST.get("jugador")
+
+        if equipo_id and jugador_id:
+            try:
+                equipo = Equipo.objects.get(id=equipo_id)
+                jugador = Jugador.objects.get(id=jugador_id)
+
+                JugadorEquipo.objects.create(
+                    equipo=equipo,
+                    jugador=jugador
+                )
+
+                return redirect("asignarJE")
+
+            except IntegrityError:
+                mensaje = "Este jugador ya está asignado a ese equipo."
+            except Equipo.DoesNotExist:
+                mensaje = "Equipo no existe."
+            except Jugador.DoesNotExist:
+                mensaje = "Jugador no existe."
+
+    return render(request, "asignarJE/asignarJE.html", {
+        "mensaje": mensaje
+    })
+
+
+
+#----------------------------------------------------------
+def asignarJP(request):
+    return render(request, 'asignarJP/asignarJP.html')
+
+
+
+
+# views.py--> para buscar 
+from django.http import JsonResponse
+from .models import Partido
+
+def buscar_partidos(request):
+    fecha = request.GET.get("fecha")
+
+    if fecha:
+        partidos = Partido.objects.filter(
+            fecha__date=fecha   # 👈 CLAVE
+        ).order_by("-fecha")
     else:
-        form = FormArbitro()
-    return render(request, 'arbitro/ingresarAr.html',{'form':form})
+        partidos = Partido.objects.all().order_by("-fecha")[:5]
+
+    data = [
+        {
+            "id": p.id,
+            "fecha": p.fecha.strftime("%d/%m/%Y %I:%M %p")
+        }
+        for p in partidos
+    ]
+
+    return JsonResponse(data, safe=False)
 
 
-def verArbitro(request):
-    arbitros = Arbitro.objects.all()
-    data = {'arbitros':arbitros}
-    return render(request,'arbitro/vistaAr.html',data)
+def buscar_equipos(request):
+    q = request.GET.get("q", "")
 
-def eliminarArbitro(request,id):
-    arbitro = Arbitro.objects.get(id = id)
-    arbitro.delete()
-    return redirect('vistaAr')
-
-def actualizarArbitro(request,id):
-    arbitro = get_object_or_404(Arbitro, id = id)
-    if request.method == 'POST':
-        form = FormArbitro(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            apellido = form.cleaned_data['apellido']
-            edad = form.cleaned_data['edad']
-            nacionalidad = form.cleaned_data['nacionalidad']
-            arbitro.nombre = nombre
-            arbitro.apellido = apellido
-            arbitro.edad = edad
-            arbitro.nacionalidad = nacionalidad
-            arbitro.save()
-            return redirect('vistaAr')
+    if q:
+        equipos = Equipo.objects.filter(
+            nombre__icontains=q
+        ).order_by("nombre")
     else:
-        form = FormArbitro(initial={
-            'nombre': arbitro.nombre,
-            'apellido': arbitro.apellido,
-            'edad': arbitro.edad,
-            'nacionalidad': arbitro.nacionalidad
-        })
-    return render(request,'arbitro/actualizarArbitro.html',{'form':form})
+        equipos = Equipo.objects.all().order_by("nombre")[:5]
 
+    data = [
+        {
+            "id": e.id,
+            "nombre": e.nombre
+        }
+        for e in equipos
+    ]
 
+    return JsonResponse(data, safe=False)
+
+def buscar_jugadores(request):
+    q = request.GET.get("q")
+
+    if q:
+        jugadores = Jugador.objects.filter(
+            nombre__icontains=q
+        ).order_by("nombre")
+    else:
+        jugadores = Jugador.objects.all().order_by("-id")[:5]
+
+    data = [
+        {
+            "id": j.id,
+            "nombre": f"{j.nombre} {j.apellido}"
+        }
+        for j in jugadores
+    ]
+
+    return JsonResponse(data, safe=False)

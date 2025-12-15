@@ -1,19 +1,11 @@
 from django.urls import path
+from . import views
+from página_deportiva.views import ingresarPartido, verPartido, eliminarPartido, actualizarPartido
+from página_deportiva.views import ingresarJugador, verJugador,eliminarJugador,actualizarJugador, ingresarEquipo, verEquipo,eliminarEquipo,actualizarEquipo
+from página_deportiva.views import  asignarEP, asignarJE, asignarJP
 
-from página_deportiva.views import ingresarEstadio, verEstadio,eliminarEstadio,actualizarEstadio,ingresarPartido, verPartido, eliminarPartido, actualizarPartido
-from página_deportiva.views import ingresarJugador, verJugador,eliminarJugador,actualizarJugador, ingresarEquipo, verEquipo,eliminarEquipo,actualizarEquipo, ingresarArbitro,verArbitro,eliminarArbitro, actualizarArbitro
 urlpatterns = [
 
-#ESTADIO-------------------------------------------------------
-    path('ingresarEstadio/',ingresarEstadio, name='ingresarEs'),
-    path('vistaEstadio/',verEstadio, name='vistaEs'),
-    path('eliminarEstadio/<int:id>/',eliminarEstadio,name='eliminarEstadio'),
-    path('actualizarEstadio/<int:id>/',actualizarEstadio,name='actualizarEs'),
-#PARTIDO--------------------------------------------------------
-    path('ingresarPartido/',ingresarPartido, name='ingresarPa'),
-    path('vistaPartido/',verPartido, name='vistaPa'),
-    path('eliminarPartido/<int:id>/',eliminarPartido,name='eliminarPartido'),#El name puede ser cualquier nombre ES UN IDENTIFICADOR PARA LA RUTA
-    path('actualizarPartido/<int:id>/',actualizarPartido,name='actualizarPartido'),
 #JUGADOR------------------------------------------------------
     path('ingresarJugador/',ingresarJugador, name='ingresarJu'),
     path('vistaJugador/',verJugador, name='vistaJu'),
@@ -24,13 +16,18 @@ urlpatterns = [
     path('vistaEquipo/',verEquipo, name='vistaEq'),
     path('eliminarEquipo/<int:id>/',eliminarEquipo,name='eliminarEquipo'),
     path('actualizarEquipo/<int:id>/',actualizarEquipo,name='actualizarEquipo'),
-
-#ARBITRO-----------------------------------------------------
-    path('ingresarArbitro/',ingresarArbitro, name='ingresarAr'),
-    path('vistaArbitro/',verArbitro, name='vistaAr'),
-    path('eliminarArbitro/<int:id>/',eliminarArbitro,name='eliminarArbitro'),
-    path('actualizarArbitro/<int:id>/',actualizarArbitro,name='actualizarArbitro')
-#MENU--------------------------------------------------------------
-
-
+#PARTIDO--------------------------------------------------------
+    path('ingresarPartido/',ingresarPartido, name='ingresarPa'),
+    path('vistaPartido/',verPartido, name='vistaPa'),
+    path('eliminarPartido/<int:id>/',eliminarPartido,name='eliminarPartido'),#El name puede ser cualquier nombre ES UN IDENTIFICADOR PARA LA RUTA
+    path('actualizarPartido/<int:id>/',actualizarPartido,name='actualizarPartido'),
+#EQUIPOXPARTIDO--------------------------------------------------------
+    path('asignarEP/',asignarEP, name='asignarEP'),
+    path("buscar-partidos/", views.buscar_partidos, name="buscar_partidos"),
+    path("buscar-equipos/", views.buscar_equipos, name="buscar_equipos"),
+#JUGADORESXEQUIPO-------------------------------------------------------
+    path('asignarJE/',asignarJE, name='asignarJE'),
+    path("buscar-jugadores/", views.buscar_jugadores, name="buscar_jugadores"),
+#JUAGADORXPARTIDO--------------------------------------------------
+    path('asignarJP',asignarJP, name='asignarJP')
 ]

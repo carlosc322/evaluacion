@@ -42,28 +42,6 @@ class FormEquipo(forms.Form):
 
 #ESTADIO--------------------------------------------------------
 
-class FormEstadio(forms.Form):
-    nombre = forms.CharField(   
-        required=True,
-        error_messages={'required': 'Este campo es obligatorio.'}
-        )#------CAMPO
-    capacidad = forms.IntegerField(     
-        required=True,
-        error_messages={'required': 'Este campo es obligatorio.'}
-        )#------CAMPO
-
-
-    def clean_nombre(self):
-        nombre = self.cleaned_data['nombre']
-        nombre = validadorCadena(nombre)
-        return nombre
-
-    def clean_capacidad(self):
-        capacidad = self.cleaned_data['capacidad']
-        if capacidad<0:
-            raise forms.ValidationError('Ingrese numeros enteros positivos')
-        return capacidad
-    
     
 #JUGADOR------------------------------------------------------------
 
@@ -129,49 +107,6 @@ class FormPartido(forms.Form):
     def clean_fecha(self):
         fecha = self.cleaned_data['fecha'] 
         return fecha
-
-#ARBITRO-------------------------------------------------------------------------------
-class FormArbitro(forms.Form):
-    nombre = forms.CharField(   
-        required=True,
-        error_messages={'required': 'Este campo es obligatorio.'}
-        )
-    apellido = forms.CharField( 
-        required=True,
-        error_messages={'required':'Este campo es obligatorio.'}
-        )
-    edad = forms.IntegerField(  
-        required=True,
-        error_messages={'required':'Este campo es obigatorio.'}
-        )
-    nacionalidad = forms.CharField(
-        required=True,
-        error_messages={'required':'Este campo es obligatorio.'}
-        )
-
-
-    def clean_nombre(self):
-        nombre = self.cleaned_data['nombre']
-        nombre = validadorCadena(nombre)
-        return nombre
-
-    def clean_apellido(self):
-        apellido = self.cleaned_data['apellido']
-        apellido = validadorCadena(apellido)
-        return apellido
-
-    def clean_edad(self):
-        edad = self.cleaned_data['edad']
-        if edad<=0:
-            raise forms.ValidationError('El campo acepta numeros enteros positivos')
-        return edad
-
-    def clean_nacionalidad(self):
-        nacionalidad = self.cleaned_data['nacionalidad']
-        nacionalidad = validadorCadena(nacionalidad)
-        return nacionalidad
-
-
 
 #USUARIO------------------------------------------------------------
 

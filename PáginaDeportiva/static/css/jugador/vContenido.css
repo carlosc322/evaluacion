@@ -1,12 +1,13 @@
 /* Barra superior */
-#container_contenido{/*TODO ESTO ES EL ESPACIO ENTRE LAS DOS CAJAS MENU Y contenido*/
+#container_contenido {
     margin: auto;
-    padding: 10px;
-    
+    padding: 10px 15px;
     background-color: rgb(237, 237, 227);
-    width: 60%;
+    width: 61%;
     text-align: center;
+    margin-top: 30px;
 }
+
 .barra-superior {
     display: flex;
     justify-content: space-between;
@@ -17,7 +18,7 @@
     border-radius: 3px;
     border-bottom: 15px solid white;
     margin-bottom: 10px;
-    
+
 }
 
 .buscador {
@@ -59,20 +60,23 @@
 .tarjeta.encabezado {
     display: grid;
     grid-template-columns:
-        50px   /* Imagen */
-        35px   /* ID */
-        100px  /* Nombre */
-        110px  /* Apellido */
-        60px   /* Dorsal */
-        130px  /* Nacionalidad */
-        100px  /* Posición */
-        auto;  /* Botones */
+    40px   /* imagen */
+    30px   /* ID */
+    90px   /* nombre */
+    100px  /* apellido */
+    50px   /* dorsal */
+    110px  /* nacionalidad */
+    90px   /* posición */
+    110px  /* equipo */
+    150px; /*  /* 🔥 Botones con ancho fijo */
     align-items: center;
     padding: 6px 8px;
     padding-bottom: 1px;
 }
+
 .tarjeta{
     background-color: white;
+    
 }
 
 /* Encabezado especial */
@@ -82,6 +86,7 @@
     font-weight: bold;
     color: #333;
     padding: 5px 8px;
+    font-size: 12px;
 }
 
 /* Imagen */
@@ -93,13 +98,12 @@
 }
 
 /* Texto */
-.col-texto {
-    font-size: 14px;
-    color: #333;
-    padding: 3px;
+.col-texto,
+.col-numero {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 13px;
 }
 
 /* Números (ID, dorsal) */
@@ -113,9 +117,13 @@
 
 /* Botones */
 .col-botones {
-    margin-left: auto;
+
     display: flex;
-    gap: 8px;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;         /* 🔥 no saltan */
+    overflow: hidden;
 }
 
 /* Estilo botones */
@@ -143,4 +151,11 @@
 .btn-opcion.eliminar:hover {
     background-color: #f44336;
     color: white;
+}
+/* ===============================
+   FIX DEFINITIVO DESBORDE TARJETAS
+   =============================== */
+
+.tarjeta {
+    overflow: hidden;          /* 🔥 corta todo lo que se sale */
 }
